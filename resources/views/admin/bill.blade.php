@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Add Product</title>
+        <title>Bill details</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
@@ -71,8 +71,8 @@
                     </div>
                 </header>
 
-       <!-- ========== Left Sidebar Start ========== -->
-       <div class="vertical-menu">
+<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
 
 <div data-simplebar class="h-100">
 
@@ -97,10 +97,20 @@
                     <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
                     <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
                     <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>
+                    <li><a href="ecommerce-shops.html" key="t-shops">Shops</a></li>
                 </ul>
             </li>
 
-            
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-receipt"></i>
+                    <span key="t-invoices">Invoices</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="invoices-list.html" key="t-invoice-list">Invoice List</a></li>
+                    <li><a href="invoices-detail.html" key="t-invoice-detail">Invoice Detail</a></li>
+                </ul>
+            </li>
 
 
             <li class="menu-title" key="t-pages">Pages</li>
@@ -140,7 +150,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Add Product</h4>
+                                    <h4 class="mb-0 font-size-18">Bill Details</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
@@ -159,79 +169,82 @@
                                 <div class="card">
                                     <div class="card-body">
         
-                                        <h4 class="card-title">Basic Information</h4>
-                                        <p class="card-title-desc">Fill all information below</p>
+                                        <h4 class="card-title">Customer Information</h4>
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input id="name" type="text" class="form-control" readonly value={{$customer->name}}>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">Phone</label>
+                                            <input id="phone" type="number" class="form-control" readonly value={{$customer->phone}}>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cnic">Cnic</label>
+                                            <input id="cnic" type="number" class="form-control" readonly value={{$customer->cnic}}>
+                                        </div>
         
-                                        <form action="{{route('store')}}" method="post">
-                                            @csrf
+                                        <!-- <form action="{{route('store')}}" method="post"> -->
+                                            
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="productname">Product Name</label>
-                                                        <input id="productname" name="ProductTitle" type="text" class="form-control">
+                                                <div class="table-responsive">
+                                            <table class="table table-centered table-nowrap">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th style="width: 20px;">
+                                                            Product ID
+                                                        </th>
+                                                        <th>Product Name</th>
+                                                        <th>Product Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($products as $product)
+                                                    <tr>
+                                                        <td>{{$product->id}}</td>
+                                                        <td>{{$product->title}}</td>
+                                                        <td>{{$product->sale_price}}</td>
+                                                    </tr>
+
+                                                @endforeach    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <form action="{{route('payBill')}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="customerID" value={{$customer->id}}>
+                                        <div class="form-group">
+                                                        <label for="productname">Sub Total</label>
+                                                        <input id="productname" name="subtotal" type="text" class="form-control" placeholder={{$subTotal}} readonly value="{{$subTotal}}">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="price">Price</label>
-                                                        <input id="price" name="price" type="text" class="form-control">
+                                                        <label for="discount">Discount</label>
+                                                        <input id="discount" name="discount" type="text" class="form-control" placeholder={{$discount}} readonly value={{$discount}}>
                                                     </div>
                                                     <div class="form-group">
-                                                    <label for="size"> <b>Enter Size Detail</b> </label><br>
-                                                    <label id="size" for="size-title">Title </label><br>
-                                                    <input id="size-title" name="sizeTitle" type="text" class="form-control" placeholder="e.g(small/medium/large..)">
-                                                    <br>   
-                                                    <label id="size" for="width">Width</label><br>
-                                                    <input id="width" name="width" type="text" class="form-control" placeholder="">
-                                                    <br>  
-                                                    <label id="size" for="length">Length</label><br>
-                                                    <input id="length" name="length" type="text" class="form-control" placeholder="">
-                                                    <br>  
+                                                        <label for="total">Total</label>
+                                                        <input id="total" name="total" type="text" class="form-control" placeholder={{$total}} readonly value={{$total}}>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="price">Payment recieved</label>
+                                                        <input id="price" name="recieve" type="number" class="form-control" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        @foreach($products as $product)
+                                                       <input type="hidden" name="products[]" value="{{$product->id}}">
+                                                       @endforeach
+                                                        <button type="submit" name="pay" class="form-control btn btn-success">Pay</button>
+                                                        <!-- <input  name="pay" type="button" class="form-control btn btn-success"  > -->
                                                     </div>
 
-                                                    <div class="form-group">
-                                                    <label for="weight"> <b>Enter Weight Detail</b> </label><br>
-                                                    <label id="weight" for="weight-unit">Unit </label><br>
-                                                    <input id="weight-unit" name="unit" type="text" class="form-control" placeholder="e.g(kg/g/mg..)">
-                                                    <br>   
-                                                    <label for="total-weight">Net weight</label><br>
-                                                    <input id="total-weight" name="totalWeight" type="text" class="form-control" placeholder="">
-                                                  
-                                                    </div>
-                                                   
+                                        </form>
                                                     
                                                 </div>
         
-                                                <!-- <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Category</label>
-                                                        <select class="form-control select2">
-                                                            <option>Select</option>
-                                                            <option value="AK">Alaska</option>
-                                                            <option value="HI">Hawaii</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Features</label>
-        
-                                                        <select class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ...">
-                                                            <option value="AK">Alaska</option>
-                                                            <option value="HI">Hawaii</option>
-                                                            <option value="CA">California</option>
-                                                            <option value="NV">Nevada</option>
-                                                            <option value="OR">Oregon</option>
-                                                            <option value="WA">Washington</option>
-                                                        </select>
-        
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="productdesc">Product Description</label>
-                                                        <textarea class="form-control" id="productdesc" rows="5"></textarea>
-                                                    </div>
-                                                    
-                                                </div> -->
+                                        
                                             </div>
         
-                                            <button type="submit" name="addProduct" class="btn btn-primary mr-1 waves-effect waves-light">Save Changes</button>
-                                        </form>
+                                        <!-- </form> -->
         
                                     </div>
                                 </div>

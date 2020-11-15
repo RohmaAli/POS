@@ -14,4 +14,12 @@ class Product extends Model
     {
         return $this->hasMany('App\Weight');
     }
+    public function purchases()
+    {
+        return $this->hasMany('App\Purchase');
+    }
+    public function sales()
+    {
+        return $this->belongsToMany('App\Sale');
+    }
 }

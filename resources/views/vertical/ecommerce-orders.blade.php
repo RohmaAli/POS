@@ -2,29 +2,30 @@
 <html lang="en">
 
     
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/tasks-create.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:56:09 GMT -->
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:55:47 GMT -->
 <head>
         
         <meta charset="utf-8" />
-        <title>Create Task | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Add Product | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
 
-        <!-- datepicker css -->
-        <link href="assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <!-- select2 css -->
+        <link href="{{asset('libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
 
-        <!-- Summernote css -->
-        <link href="assets/libs/summernote/summernote-bs4.min.css" rel="stylesheet" type="text/css" />
+        <!-- dropzone css -->
+        <link href="{{asset('libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap Css -->
-        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -760,12 +761,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Create Task</h4>
+                                    <h4 class="mb-0 font-size-18">Orders</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tasks</a></li>
-                                            <li class="breadcrumb-item active">Create Task</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                            <li class="breadcrumb-item active">Orders</li>
                                         </ol>
                                     </div>
 
@@ -775,88 +776,173 @@
                         <!-- end page title -->
 
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title mb-4">Create New Task</h4>
-                                        <form class="outer-repeater">
-                                            <div data-repeater-list="outer-group" class="outer">
-                                                <div data-repeater-item class="outer">
-                                                    <div class="form-group row mb-4">
-                                                        <label for="taskname" class="col-form-label col-lg-2">Task Name</label>
-                                                        <div class="col-lg-10">
-                                                            <input id="taskname" name="taskname" type="text" class="form-control" placeholder="Enter Task Name...">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row mb-4">
-                                                        <label class="col-form-label col-lg-2">Task Description</label>
-                                                        <div class="col-lg-10">
-                                                            <div class="summernote">Hello Summernote</div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row mb-4">
-                                                        <label class="col-form-label col-lg-2">Task Date</label>
-                                                        <div class="col-lg-10">
-                                                            <div class="input-daterange input-group" data-provide="datepicker">
-                                                                <input type="text" class="form-control" placeholder="Start Date" name="start" />
-                                                                <input type="text" class="form-control" placeholder="End Date" name="end" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="inner-repeater mb-4">
-                                                        <div data-repeater-list="inner-group" class="inner form-group mb-0 row">
-                                                            <label class="col-form-label col-lg-2">Add Team Member</label>
-                                                            <div  data-repeater-item class="inner col-lg-10 ml-md-auto">
-                                                                <div class="mb-3 row align-items-center">
-                                                                    <div class="col-md-6">
-                                                                        <input type="text" class="inner form-control" placeholder="Enter Name..."/>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <div class="mt-4 mt-md-0">
-                                                                            <input type="file" class="form-control-file">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <div class="mt-2 mt-md-0">
-                                                                            <input data-repeater-delete type="button" class="btn btn-primary btn-block inner" value="Delete"/>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row justify-content-end">
-                                                            <div class="col-lg-10">
-                                                                <input data-repeater-create type="button" class="btn btn-success inner" value="Add Number"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row mb-4">
-                                                        <label for="taskbudget" class="col-form-label col-lg-2">Budget</label>
-                                                        <div class="col-lg-10">
-                                                            <input id="taskbudget" name="taskbudget" type="text" placeholder="Enter Task Budget..." class="form-control">
-                                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-4">
+                                                <div class="search-box mr-2 mb-2 d-inline-block">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" placeholder="Search...">
+                                                        <i class="bx bx-search-alt search-icon"></i>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                        <div class="row justify-content-end">
-                                            <div class="col-lg-10">
-                                                <button type="submit" class="btn btn-primary">Create Task</button>
-                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="text-sm-right">
+                                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add New Order</button>
+                                                </div>
+                                            </div><!-- end col-->
                                         </div>
+                
+                                        <div class="table-responsive">
+                                            <table class="table table-centered table-nowrap">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th style="width: 20px;">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                                <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                                                            </div>
+                                                        </th>
+                                                        <th>Purchase ID</th>
+                                                        <th>Product Name</th>
+                                                        <th>Product Price</th>
+                                                        <th>Date of purchase</th>
+                                            
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach(@products as @product)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                                <label class="custom-control-label" for="customCheck2">&nbsp;</label>
+                                                            </div>
+                                                        </td>
+                                                        <td><a href="" class="text-body font-weight-bold">{{($product->$purchase)->id}}</a> </td>
+                                                        <td>{{$product->name}}</td>
+                                                        <td>{{$product->sale_price}}</td>
+                                                        <td>{{($product->purchase)->created_at}}</td>
+                                                    </tr>
 
+                                                @endforeach    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                    <i class="mdi mdi-chevron-left"></i>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                    <i class="mdi mdi-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end row -->
-
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
+
+                <!-- Modal -->
+                <div class="modal fade exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
+                                <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
+
+                                <div class="table-responsive">
+                                    <table class="table table-centered table-nowrap">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
+                                                        <p class="text-muted mb-0">$ 225 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 255</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-4.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
+                                                        <p class="text-muted mb-0">$ 145 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 145</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Sub Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Shipping:</h6>
+                                                </td>
+                                                <td>
+                                                    Free
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 
                 <footer class="footer">
@@ -934,21 +1020,11 @@
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
-
-        <!-- bootstrap datepicker -->
-        <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-
-        <!-- Summernote js -->
-        <script src="assets/libs/summernote/summernote-bs4.min.js"></script>
         
-        <!-- form repeater js -->
-        <script src="assets/libs/jquery.repeater/jquery.repeater.min.js"></script>
-
-        <script src="assets/js/pages/task-create.init.js"></script>
-
+        <!-- App js -->
         <script src="assets/js/app.js"></script>
 
     </body>
 
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/tasks-create.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:56:09 GMT -->
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:55:47 GMT -->
 </html>

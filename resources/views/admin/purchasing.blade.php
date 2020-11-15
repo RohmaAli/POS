@@ -2,23 +2,30 @@
 <html lang="en">
 
     
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/tasks-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:56:06 GMT -->
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:55:47 GMT -->
 <head>
         
         <meta charset="utf-8" />
-        <title>Task List | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Sales Products</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+
+        <!-- select2 css -->
+        <link href="{{asset('libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+
+        <!-- dropzone css -->
+        <link href="{{asset('libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap Css -->
-        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -746,7 +753,7 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
-
+                
                 <div class="page-content">
                     <div class="container-fluid">
 
@@ -754,12 +761,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Task List</h4>
+                                    <h4 class="mb-0 font-size-18">Orders</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tasks</a></li>
-                                            <li class="breadcrumb-item active">Task List</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                            <li class="breadcrumb-item active">Orders</li>
                                         </ol>
                                     </div>
 
@@ -767,368 +774,167 @@
                             </div>
                         </div>
                         <!-- end page title -->
-
+                        
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title mb-4">Upcoming</h4>
-                                        <div class="table-responsive">
-                                            <table class="table table-nowrap table-centered mb-0">
+                                        <div class="row mb-2">
+                                            <div class="col-sm-4">
+                                                <div class="search-box mr-2 mb-2 d-inline-block">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" placeholder="Search...">
+                                                        <i class="bx bx-search-alt search-icon"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-sm-8"> -->
+                                               
+                                            <!-- </div> end col-sm-8 -->
+                                        </div>
+                <form action="" method="">
+                @csrf
+                    <div class="table-responsive">
+                                            <table class="table table-centered table-nowrap">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        
+                                                        <th>Product ID</th>
+                                                        <th>Product Name</th>
+                                                        <th>Product Price</th>
+                                                        <th>Quantity Sold</th>
+                                                    </tr>
+                                                </thead>
                                                 <tbody>
+                                               @foreach($products as $product)
                                                     <tr>
-                                                        <td style="width: 60px;">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                                <label class="custom-control-label" for="customCheck1"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Create a Skote Dashboard UI</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member">
-                                                                    <img src="assets/images/users/avatar-2.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-            
-                                                                <a href="javascript: void(0);" class="team-member">
-                                                                    <img src="assets/images/users/avatar-1.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <span class="badge badge-pill badge-soft-secondary font-size-11">Waiting</span>
-                                                            </div>
-                                                        </td>
+                                                        
+                                                        <td>{{$product->id}}</td>
+                                                        <td>{{$product->title}}</td>
+                                                        <td>{{$product->sale_price}}</td>
+                                                        <td>{{$product->quantity_sold}}</td>
+                                                        
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck2" checked>
-                                                                <label class="custom-control-label" for="customCheck2"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Create a New Landing UI</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-4.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-            
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-5.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                                
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <div class="avatar-xs">
-                                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                                            3 +
-                                                                        </span>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <span class="badge badge-pill badge-soft-primary font-size-11">Approved</span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-    
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                                                <label class="custom-control-label" for="customCheck3"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Create a Skote Logo</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <div class="avatar-xs">
-                                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                                            F
-                                                                        </span>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <span class="badge badge-pill badge-soft-secondary font-size-11">Waiting</span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+
+                                               @endforeach
                                                 </tbody>
                                             </table>
-                                        </div>
+                    </div>
+
+                </form>
+                                        
+                                        <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                    <i class="mdi mdi-chevron-left"></i>
+                                                    </a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                    <i class="mdi mdi-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">In Progress</h4>
-                                        <div class="table-responsive">
-                                            <table class="table table-nowrap table-centered mb-0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="width: 60px;">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck4" checked>
-                                                                <label class="custom-control-label" for="customCheck4"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Brand logo design</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <span class="badge badge-pill badge-soft-success font-size-11">Complete</span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                                                <label class="custom-control-label" for="customCheck5"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Create a Blog Template UI</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <div class="avatar-xs">
-                                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                                            S
-                                                                        </span>
-                                                                    </div>
-                                                                </a>
-
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-8.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-            
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-1.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                                
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <span class="badge badge-pill badge-soft-warning font-size-11">Pending</span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">Completed</h4>
-                                        <div class="table-responsive">
-                                            <table class="table table-nowrap table-centered mb-0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="width: 60px;">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                                                <label class="custom-control-label" for="customCheck6"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Redesign - Landing page</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-6.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <div class="avatar-xs">
-                                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                                            F
-                                                                        </span>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <span class="badge badge-pill badge-soft-success font-size-11">Complete</span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck7" checked>
-                                                                <label class="custom-control-label" for="customCheck7"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Multipurpose Landing</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <span class="badge badge-pill badge-soft-success font-size-11">Complete</span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                                                <label class="custom-control-label" for="customCheck8"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Create a Blog Template UI</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-4.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-            
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <div class="avatar-xs">
-                                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                                            S
-                                                                        </span>
-                                                                    </div>
-                                                                </a>
-
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-2.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="text-center">
-                                                                <span class="badge badge-pill badge-soft-success font-size-11">Complete</span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end col -->
-
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-3">Tasks</h4>
-
-                                        <div id="task-chart" class="apex-charts"></div>
-                                    </div>
-                                </div>
-
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">Recent Tasks</h4>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-nowrap table-centered mb-0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Brand logo design</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Create a Blog Template UI</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <div class="avatar-xs">
-                                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                                            S
-                                                                        </span>
-                                                                    </div>
-                                                                </a>
-
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-8.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-            
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-1.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                                
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <h5 class="text-truncate font-size-14 m-0"><a href="#" class="text-dark">Redesign - Landing page</a></h5>
-                                                        </td>
-                                                        <td>
-                                                            <div class="team">
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                                <a href="javascript: void(0);" class="team-member d-inline-block">
-                                                                    <img src="assets/images/users/avatar-4.jpg" class="rounded-circle avatar-xs m-1" alt="">
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- end table responsive -->
-                                    </div>
-                                </div>
-                                
                             </div>
                         </div>
                         <!-- end row -->
-
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
+
+                <!-- Modal -->
+                <div class="modal fade exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
+                                <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
+
+                                <div class="table-responsive">
+                                    <table class="table table-centered table-nowrap">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
+                                                        <p class="text-muted mb-0">$ 225 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 255</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-4.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
+                                                        <p class="text-muted mb-0">$ 145 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 145</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Sub Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Shipping:</h6>
+                                                </td>
+                                                <td>
+                                                    Free
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 
                 <footer class="footer">
@@ -1206,15 +1012,11 @@
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
-
-        <!-- apexcharts -->
-        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-
-        <script src="assets/js/pages/tasklist.init.js"></script>
-
+        
+        <!-- App js -->
         <script src="assets/js/app.js"></script>
 
     </body>
 
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/tasks-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:56:07 GMT -->
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:55:47 GMT -->
 </html>

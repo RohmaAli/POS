@@ -24,7 +24,7 @@
 
     
     <body data-sidebar="dark">
-        
+        <form action="">
             <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
         <!-- Begin page -->
@@ -84,11 +84,11 @@
                                         <span key="t-ecommerce">Ecommerce</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
-                                        <li><a href="{{route('viewProducts')}}" key="t-add-product">Add Product</a></li>
-                                        <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li>
-                                        <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
-                                        <li><a href="{{route('products')}}" key="t-products">Products</a></li>
-                                        <!-- <li><a href="ecommerce-product-detail.html" key="t-product-detail"></a></li> -->
+                                        <li><a href="{{route('viewExpense')}}" key="t-add-product">Daily expenses</a></li>
+                                        <li><a href="{{route('viewSale')}}" key="t-add-product">Sales</a></li>
+                                        <li><a href="/views/vertical/ecommerce-products.blade.php" key="t-products">Products</a></li>
+                                        <li><a href="ecommerce-product-detail.html" key="t-product-detail">Product Detail</a></li>
+                                        <li><a href="ecommerce-orders.html" key="t-orders">Orders</a></li>
                                         <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
                                         <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
                                         <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>
@@ -169,8 +169,8 @@
                                                 <div class="card-body">
                                                     <div class="media">
                                                         <div class="media-body">
-                                                            <p class="text-muted font-weight-medium">Sales</p>
-                                                            <h4 class="mb-0">{{$totalSales}}</h4>
+                                                            <p class="text-muted font-weight-medium">Orders</p>
+                                                            <h4 class="mb-0">1,235</h4>
                                                         </div>
 
                                                         <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
@@ -188,7 +188,7 @@
                                                     <div class="media">
                                                         <div class="media-body">
                                                             <p class="text-muted font-weight-medium">Revenue</p>
-                                                            <h4 class="mb-0"><I>--</I></h4>
+                                                            <h4 class="mb-0">$35, 723</h4>
                                                         </div>
 
                                                         <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
@@ -205,8 +205,8 @@
                                                 <div class="card-body">
                                                     <div class="media">
                                                         <div class="media-body">
-                                                            <p class="text-muted font-weight-medium">Total products</p>
-                                                            <h4 class="mb-0">{{$totalProducts}}</h4>
+                                                            <p class="text-muted font-weight-medium">Average Price</p>
+                                                            <h4 class="mb-0">$16.2</h4>
                                                         </div>
 
                                                         <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
@@ -224,23 +224,9 @@
                                 </div>
                             </div>
                             <!-- end row -->
-                            <form action="{{route('customer')}}" method = "post">
-                            @csrf
-                                <div class="row">
-                                    <div class="col-xl-8">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <h4 class="mb-0 font-size-18">Choose Customer</h4> <br>
-                                                <button type="submit" name="existing"  class="form-control btn btn-success mr-1 waves-effect waves-light" value='1'>Existing Customer</button>
-                                            </div> 
-                                            <div class="form-group">
-                                                <button type="submit" name="new" class="form-control btn btn-success mr-1 waves-effect waves-light" value='2'>New Customer</button>
-                                            </div>
-                                        </div> <!-- end col-md-12-->
-                                    </div> <!--end xl-->
-                                </div> <!--end-row-->
+
                             <!-- end row -->
-                            </form> 
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="card">
@@ -250,21 +236,36 @@
                                                 <table class="table table-centered table-nowrap mb-0">
                                                     <thead class="thead-light">
                                                         <tr>
-                                                            
-                                                            <th>Sale ID</th>
+                                                            <th style="width: 20px;">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                                    <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                                                                </div>
+                                                            </th>
+                                                            <th>Order ID</th>
+                                                            <th>Billing Name</th>
                                                             <th>Date</th>
                                                             <th>Total</th>
                                                             <th>Payment Status</th>
                                                             <th>Payment Method</th>
+                                                            <th>View Details</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @if($sale)
                                                         <tr>
-                                                            <td>{{$sale->id}}</a> </td>
-                                                            <td>{{$sale->created_at}}</td>
-                                                            <td>    
-                                                                {{$sale->total}}
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                                    <label class="custom-control-label" for="customCheck2">&nbsp;</label>
+                                                                </div>
+                                                            </td>
+                                                            <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2540</a> </td>
+                                                            <td>Neal Matthews</td>
+                                                            <td>
+                                                                07 Oct, 2019
+                                                            </td>
+                                                            <td>
+                                                                $400
                                                             </td>
                                                             <td>
                                                                 <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
@@ -272,9 +273,13 @@
                                                             <td>
                                                                 <i class="fab fa-cc-mastercard mr-1"></i> Mastercard
                                                             </td>
-                                                            
-                                                        </tr> 
-                                                    @endif                                            
+                                                            <td>
+                                                                <!-- Button trigger modal -->
+                                                                <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-toggle="modal" data-target=".exampleModal">
+                                                                    View Details
+                                                                </button>
+                                                            </td>
+                                                        </tr>                                         
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -396,7 +401,7 @@
 
             </div>
 <!-- END layout-wrapper -->
-       
+        </form>
         <!-- JAVASCRIPT -->
         <script src="assets/libs/jquery/jquery.min.js"></script>
         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -6,19 +6,26 @@
 <head>
         
         <meta charset="utf-8" />
-        <title>Orders | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Add Product | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+
+        <!-- select2 css -->
+        <link href="{{asset('libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+
+        <!-- dropzone css -->
+        <link href="{{asset('libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap Css -->
-        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -798,17 +805,15 @@
                                                                 <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                                             </div>
                                                         </th>
-                                                        <th>Order ID</th>
-                                                        <th>Billing Name</th>
+                                                        <th>Expense ID</th>
+                                                        <th>Expense Name</th>
+                                                        <th>Amount</th>
                                                         <th>Date</th>
-                                                        <th>Total</th>
-                                                        <th>Payment Status</th>
-                                                        <th>Payment Method</th>
-                                                        <th>View Details</th>
-                                                        <th>Action</th>
+                                            
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                @foreach(@products as @product)
                                                     <tr>
                                                         <td>
                                                             <div class="custom-control custom-checkbox">
@@ -816,290 +821,13 @@
                                                                 <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                                             </div>
                                                         </td>
-                                                        <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2540</a> </td>
-                                                        <td>Neal Matthews</td>
-                                                        <td>
-                                                            07 Oct, 2019
-                                                        </td>
-                                                        <td>
-                                                            $400
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fab fa-cc-mastercard mr-1"></i> Mastercard
-                                                        </td>
-                                                        <td>
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target=".exampleModal">
-                                                              View Details
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-close font-size-18"></i></a>
-                                                        </td>
+                                                        <td><a href="" class="text-body font-weight-bold">{{($product->$purchase)->id}}</a> </td>
+                                                        <td>{{$product->name}}</td>
+                                                        <td>{{$product->sale_price}}</td>
+                                                        <td>{{($product->purchase)->created_at}}</td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                                                <label class="custom-control-label" for="customCheck3">&nbsp;</label>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2541</a> </td>
-                                                        <td>Jamal Burnett</td>
-                                                        <td>
-                                                            07 Oct, 2019
-                                                        </td>
-                                                        <td>
-                                                            $380
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-danger font-size-12">Chargeback</span>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fab fa-cc-visa mr-1"></i> Visa
-                                                        </td>
-                                                        <td>
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target=".exampleModal">
-                                                                View Details
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-close font-size-18"></i></a>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                                                <label class="custom-control-label" for="customCheck4">&nbsp;</label>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2542</a> </td>
-                                                        <td>Juan Mitchell</td>
-                                                        <td>
-                                                            06 Oct, 2019
-                                                        </td>
-                                                        <td>
-                                                            $384
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fab fa-cc-paypal mr-1"></i> Paypal
-                                                        </td>
-                                                        <td>
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target=".exampleModal">
-                                                                View Details
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-close font-size-18"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                                                <label class="custom-control-label" for="customCheck5">&nbsp;</label>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2543</a> </td>
-                                                        <td>Barry Dick</td>
-                                                        <td>
-                                                            05 Oct, 2019
-                                                        </td>
-                                                        <td>
-                                                            $412
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fab fa-cc-mastercard mr-1"></i> Mastercard
-                                                        </td>
-                                                        <td>
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target=".exampleModal">
-                                                                View Details
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-close font-size-18"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                                                <label class="custom-control-label" for="customCheck6">&nbsp;</label>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2544</a> </td>
-                                                        <td>Ronald Taylor</td>
-                                                        <td>
-                                                            04 Oct, 2019
-                                                        </td>
-                                                        <td>
-                                                            $404
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-warning font-size-12">Refund</span>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fab fa-cc-visa mr-1"></i> Visa
-                                                        </td>
-                                                        <td>
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target=".exampleModal">
-                                                                View Details
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-close font-size-18"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                                                <label class="custom-control-label" for="customCheck7">&nbsp;</label>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2545</a> </td>
-                                                        <td>Jacob Hunter</td>
-                                                        <td>
-                                                            04 Oct, 2019
-                                                        </td>
-                                                        <td>
-                                                            $392
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fab fa-cc-paypal mr-1"></i> Paypal
-                                                        </td>
-                                                        <td>
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target=".exampleModal">
-                                                                View Details
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-close font-size-18"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                                                <label class="custom-control-label" for="customCheck8">&nbsp;</label>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2546</a> </td>
-                                                        <td>William Cruz</td>
-                                                        <td>
-                                                            03 Oct, 2019
-                                                        </td>
-                                                        <td>
-                                                            $374
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fas fa-money-bill-alt mr-1"></i> COD
-                                                        </td>
-                                                        <td>
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target=".exampleModal">
-                                                                View Details
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-close font-size-18"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck9">
-                                                                <label class="custom-control-label" for="customCheck9">&nbsp;</label>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2547</a> </td>
-                                                        <td>Dustin Moser</td>
-                                                        <td>
-                                                            02 Oct, 2019
-                                                        </td>
-                                                        <td>
-                                                            $350
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fab fa-cc-mastercard mr-1"></i> Mastercard
-                                                        </td>
-                                                        <td>
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target=".exampleModal">
-                                                                View Details
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-close font-size-18"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck10">
-                                                                <label class="custom-control-label" for="customCheck10">&nbsp;</label>
-                                                            </div>
-                                                        </td>
-                                                        <td><a href="javascript: void(0);" class="text-body font-weight-bold">#SK2548</a> </td>
-                                                        <td>Clark Benson</td>
-                                                        <td>
-                                                            01 Oct, 2019
-                                                        </td>
-                                                        <td>
-                                                            $345
-                                                        </td>
-                                                        <td>
-                                                            <span class="badge badge-pill badge-soft-warning font-size-12">Refund</span>
-                                                        </td>
-                                                        <td>
-                                                            <i class="fab fa-cc-visa mr-1"></i> Visa
-                                                        </td>
-                                                        <td>
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-toggle="modal" data-target=".exampleModal">
-                                                                View Details
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="javascript:void(0);" class="mr-3 text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="mdi mdi-close font-size-18"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                    
+                                                @endforeach    
                                                 </tbody>
                                             </table>
                                         </div>

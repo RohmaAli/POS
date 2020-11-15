@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Add Product</title>
+        <title>Existing customer</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
@@ -140,12 +140,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Add Product</h4>
+                                    <h4 class="mb-0 font-size-18">Existing Customer</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                            <li class="breadcrumb-item active">Add Product</li>
+                                            <li class="breadcrumb-item active">Existing Customer</li>
                                         </ol>
                                     </div>
 
@@ -162,101 +162,34 @@
                                         <h4 class="card-title">Basic Information</h4>
                                         <p class="card-title-desc">Fill all information below</p>
         
-                                        <form action="{{route('store')}}" method="post">
+                                        <form action="{{route('existingCustomer')}}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="productname">Product Name</label>
-                                                        <input id="productname" name="ProductTitle" type="text" class="form-control">
+                                                        <label for="customerName">Customer Name</label>
+                                                        <input id="customerName" name="name" type="text" class="form-control" required>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                    <label  for="cnic">Cnic : </label><br>
+                                                    <input id="cnic" name="cnic" type="number" class="form-control" placeholder="e.g(without dashes..)" required>
+                                                    <br> 
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="price">Price</label>
-                                                        <input id="price" name="price" type="text" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                    <label for="size"> <b>Enter Size Detail</b> </label><br>
-                                                    <label id="size" for="size-title">Title </label><br>
-                                                    <input id="size-title" name="sizeTitle" type="text" class="form-control" placeholder="e.g(small/medium/large..)">
-                                                    <br>   
-                                                    <label id="size" for="width">Width</label><br>
-                                                    <input id="width" name="width" type="text" class="form-control" placeholder="">
-                                                    <br>  
-                                                    <label id="size" for="length">Length</label><br>
-                                                    <input id="length" name="length" type="text" class="form-control" placeholder="">
-                                                    <br>  
+                                                    <button type="submit" name="existing" class="form-control btn btn-primary mr-1 waves-effect waves-light">Submit</button>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                    <label for="weight"> <b>Enter Weight Detail</b> </label><br>
-                                                    <label id="weight" for="weight-unit">Unit </label><br>
-                                                    <input id="weight-unit" name="unit" type="text" class="form-control" placeholder="e.g(kg/g/mg..)">
-                                                    <br>   
-                                                    <label for="total-weight">Net weight</label><br>
-                                                    <input id="total-weight" name="totalWeight" type="text" class="form-control" placeholder="">
-                                                  
-                                                    </div>
-                                                   
-                                                    
                                                 </div>
         
-                                                <!-- <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Category</label>
-                                                        <select class="form-control select2">
-                                                            <option>Select</option>
-                                                            <option value="AK">Alaska</option>
-                                                            <option value="HI">Hawaii</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Features</label>
-        
-                                                        <select class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ...">
-                                                            <option value="AK">Alaska</option>
-                                                            <option value="HI">Hawaii</option>
-                                                            <option value="CA">California</option>
-                                                            <option value="NV">Nevada</option>
-                                                            <option value="OR">Oregon</option>
-                                                            <option value="WA">Washington</option>
-                                                        </select>
-        
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="productdesc">Product Description</label>
-                                                        <textarea class="form-control" id="productdesc" rows="5"></textarea>
-                                                    </div>
-                                                    
-                                                </div> -->
                                             </div>
         
-                                            <button type="submit" name="addProduct" class="btn btn-primary mr-1 waves-effect waves-light">Save Changes</button>
                                         </form>
         
                                     </div>
                                 </div>
 
-                                <!-- <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-3">Product Images</h4>
-
-                                        <form action="https://themesbrand.com/" method="post" class="dropzone">
-                                            <div class="fallback">
-                                                <input name="file" type="file" multiple />
-                                            </div>
-            
-                                            <div class="dz-message needsclick">
-                                                <div class="mb-3">
-                                                    <i class="display-4 text-muted bx bxs-cloud-upload"></i>
-                                                </div>
-                                                
-                                                <h4>Drop files here or click to upload.</h4>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                </div>  -->
-                                <!-- end card-->
+                                
         
                             </div>
                         </div>

@@ -2,23 +2,30 @@
 <html lang="en">
 
     
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/pages-faqs.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:56:11 GMT -->
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:55:47 GMT -->
 <head>
         
         <meta charset="utf-8" />
-        <title>FAQs | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Sales Products</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+
+        <!-- select2 css -->
+        <link href="{{asset('libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+
+        <!-- dropzone css -->
+        <link href="{{asset('libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap Css -->
-        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -746,7 +753,7 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
-
+                
                 <div class="page-content">
                     <div class="container-fluid">
 
@@ -754,202 +761,190 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">FAQs</h4>
+                                    <h4 class="mb-0 font-size-18">Orders</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Utility</a></li>
-                                            <li class="breadcrumb-item active">FAQs</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                            <li class="breadcrumb-item active">Orders</li>
                                         </ol>
                                     </div>
-                                    
+
                                 </div>
                             </div>
-                        </div>     
+                        </div>
                         <!-- end page title -->
-
                         
-                        <div class="checkout-tabs">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                        <a class="nav-link active" id="v-pills-gen-ques-tab" data-toggle="pill" href="#v-pills-gen-ques" role="tab" aria-controls="v-pills-gen-ques" aria-selected="true">
-                                            <i class= "bx bx-question-mark d-block check-nav-icon mt-4 mb-2"></i>
-                                            <p class="font-weight-bold mb-4">General Questions</p>
-                                        </a>
-                                        <a class="nav-link" id="v-pills-privacy-tab" data-toggle="pill" href="#v-pills-privacy" role="tab" aria-controls="v-pills-privacy" aria-selected="false"> 
-                                            <i class= "bx bx-check-shield d-block check-nav-icon mt-4 mb-2"></i>
-                                            <p class="font-weight-bold mb-4">Privacy Policy</p>
-                                        </a>
-                                        <a class="nav-link" id="v-pills-support-tab" data-toggle="pill" href="#v-pills-support" role="tab" aria-controls="v-pills-support" aria-selected="false">
-                                            <i class= "bx bx-support d-block check-nav-icon mt-4 mb-2"></i>
-                                            <p class="font-weight-bold mb-4">Support</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-10">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="tab-content" id="v-pills-tabContent">
-                                                <div class="tab-pane fade show active" id="v-pills-gen-ques" role="tabpanel" aria-labelledby="v-pills-gen-ques-tab">
-                                                    <h4 class="card-title mb-5">General Questions</h4>
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">What is Lorem Ipsum?</h5>
-                                                            <p class="text-muted">New common language will be more simple and regular than the existing European languages. It will be as simple as occidental.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Where does it come from?</h5>
-                                                            <p class="text-muted">Everyone realizes why a new common language would be desirable one could refuse to pay expensive translators.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Where can I get some?</h5>
-                                                            <p class="text-muted">If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Why do we use it?</h5>
-                                                            <p class="text-muted">Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Where can I get some?</h5>
-                                                            <p class="text-muted">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade" id="v-pills-privacy" role="tabpanel" aria-labelledby="v-pills-privacy-tab">
-                                                    <h4 class="card-title mb-5">Privacy Policy</h4>
-                                                    
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Where does it come from?</h5>
-                                                            <p class="text-muted">Everyone realizes why a new common language would be desirable one could refuse to pay expensive translators.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Where can I get some?</h5>
-                                                            <p class="text-muted">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">What is Lorem Ipsum?</h5>
-                                                            <p class="text-muted">New common language will be more simple and regular than the existing European languages. It will be as simple as occidental.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Why do we use it?</h5>
-                                                            <p class="text-muted">Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media   ">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Where can I get some?</h5>
-                                                            <p class="text-muted">If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade" id="v-pills-support" role="tabpanel" aria-labelledby="v-pills-support-tab">
-                                                    <h4 class="card-title mb-5">Support</h4>
-                                                
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Where can I get some?</h5>
-                                                            <p class="text-muted">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Where does it come from?</h5>
-                                                            <p class="text-muted">Everyone realizes why a new common language would be desirable one could refuse to pay expensive translators.</p>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Why do we use it?</h5>
-                                                            <p class="text-muted">Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="faq-box media mb-4">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">Where can I get some?</h5>
-                                                            <p class="text-muted">If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.</p>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="faq-box media">
-                                                        <div class="faq-icon mr-3">
-                                                            <i class="bx bx-help-circle font-size-20 text-success"></i>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="font-size-15">What is Lorem Ipsum?</h5>
-                                                            <p class="text-muted">New common language will be more simple and regular than the existing European languages. It will be as simple as occidental.</p>
-                                                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-sm-4">
+                                                <div class="search-box mr-2 mb-2 d-inline-block">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" placeholder="Search...">
+                                                        <i class="bx bx-search-alt search-icon"></i>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- <div class="col-sm-8"> -->
+                                               
+                                            <!-- </div> end col-sm-8 -->
                                         </div>
+                <form action="{{route('bill')}}" method="post">
+                @csrf
+                    <div class="table-responsive">
+                    @foreach($products as $product)
+                                            <table class="table table-centered table-nowrap">
+                                                <thead class="thead-light">
+                                                    <tr> 
+                                                        Product ID <b>{{$product->id}}</b>
+                                                        Product Name <b>{{$product->title}}</b>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Product Price</th>
+                                                        <th>Product Weight</th>
+                                                        <th>Product Size</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                              
+                                                    <tr>
+                                                        <td>{{$product->sale_price}}</td>
+                                                        <td>
+                                                        @foreach($product->weights as $weight)
+                                                        {{$weight->total_weight}}{{$weight->unit}} <br>
+                                                        @endforeach
+                                                        </td>
+                                                        <td>
+                                                        @foreach($product->sizes as $size)
+                                                        {{$size->title}}|length:{{$size->length}}|width{{$size->width}} <br>
+                                                        @endforeach
+                                                        </td>
+                                                    </tr>
+
+                                               
+                                                </tbody>
+                                            </table>
+                                            @endforeach
+                                            
+                    </div>
+
+                </form>
+                                        
+                                        <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                    <i class="mdi mdi-chevron-left"></i>
+                                                </a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                    <i class="mdi mdi-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end row -->
-
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
+
+                <!-- Modal -->
+                <div class="modal fade exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
+                                <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
+
+                                <div class="table-responsive">
+                                    <table class="table table-centered table-nowrap">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
+                                                        <p class="text-muted mb-0">$ 225 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 255</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-4.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
+                                                        <p class="text-muted mb-0">$ 145 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 145</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Sub Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Shipping:</h6>
+                                                </td>
+                                                <td>
+                                                    Free
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 
                 <footer class="footer">
@@ -1027,10 +1022,11 @@
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
-
+        
+        <!-- App js -->
         <script src="assets/js/app.js"></script>
 
     </body>
 
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/pages-faqs.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:56:11 GMT -->
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:55:47 GMT -->
 </html>

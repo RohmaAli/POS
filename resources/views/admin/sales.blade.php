@@ -2,23 +2,30 @@
 <html lang="en">
 
     
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/invoices-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:56:05 GMT -->
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:55:47 GMT -->
 <head>
         
         <meta charset="utf-8" />
-        <title>Invoice List | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Sales Products</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+
+        <!-- select2 css -->
+        <link href="{{asset('libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+
+        <!-- dropzone css -->
+        <link href="{{asset('libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap Css -->
-        <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
-        <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -746,7 +753,7 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
-
+                
                 <div class="page-content">
                     <div class="container-fluid">
 
@@ -754,12 +761,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Invoice List</h4>
+                                    <h4 class="mb-0 font-size-18">Orders</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Invoices</a></li>
-                                            <li class="breadcrumb-item active">Invoice List</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                            <li class="breadcrumb-item active">Orders</li>
                                         </ol>
                                     </div>
 
@@ -767,317 +774,183 @@
                             </div>
                         </div>
                         <!-- end page title -->
-
-                        <div class="row">
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-center">
-                                                    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
-                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary font-size-16">
-                                                            M
-                                                        </span>
-                                                    </div>
-                                                    <h5 class="mb-1 font-size-15 text-truncate">Marion Burton</h5>
-                                                    <a href="#" class="text-muted">@Skote</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <a href="invoices-detail.html" class="d-block text-primary mb-2">Invoice #14251</a>
-                                                    <h5 class="text-truncate mb-4 mb-lg-5">Skote Dashboard UI</h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Amount"><i class="bx bx-money mr-1 text-primary"></i> $ 1455</h5>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Due Date"><i class="bx bx-calendar mr-1 text-primary"></i> 10 Oct, 19</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-center">
-                                                    <img src="assets/images/users/avatar-2.jpg" class="avatar-sm mr-3 rounded-circle mb-4 float-left float-lg-none" alt="img" />
-                                                    <h5 class="mb-1 font-size-15 text-truncate">Francis Witte</h5>
-                                                    <a href="#" class="text-muted">@Skote</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <a href="invoices-detail.html" class="d-block mb-2">Invoice #14252</a>
-                                                    <h5 class="text-truncate mb-4 mb-lg-5">Brand logo design</h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Amount"><i class="bx bx-money mr-1 text-primary"></i> $ 1024</h5>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Due Date"><i class="bx bx-calendar mr-1 text-primary"></i> 11 Oct, 19</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-center">
-                                                    <img src="assets/images/users/avatar-7.jpg" class="avatar-sm mr-3 rounded-circle mb-4 float-left float-lg-none" alt="img" />
-                                                    <h5 class="mb-1 font-size-15 text-truncate">Joseph Flint</h5>
-                                                    <a href="#" class="text-muted">@Skote</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <a href="invoices-detail.html" class="d-block mb-2">Invoice #14253</a>
-                                                    <h5 class="text-truncate mb-4 mb-lg-5">Landing page Design</h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Amount"><i class="bx bx-money mr-1 text-primary"></i> $ 1189</h5>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Due Date"><i class="bx bx-calendar mr-1 text-primary"></i> 12 Oct, 19</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-center">
-                                                    <img src="assets/images/users/avatar-8.jpg" class="avatar-sm mr-3 rounded-circle mb-4 float-left float-lg-none" alt="img" />
-                                                    <h5 class="mb-1 font-size-15 text-truncate">Larry Nielsen</h5>
-                                                    <a href="#" class="text-muted">@Skote</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <a href="invoices-detail.html" class="d-block text-primary mb-2">Invoice #14254</a>
-                                                    <h5 class="text-truncate mb-4 mb-lg-5">Redesign - Landing page</h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Amount"><i class="bx bx-money mr-1 text-primary"></i> $ 1245</h5>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Due Date"><i class="bx bx-calendar mr-1 text-primary"></i> 12 Oct, 19</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-center">
-                                                    <img src="assets/images/users/avatar-5.jpg" class="avatar-sm mr-3 rounded-circle mb-4 float-left float-lg-none" alt="img" />
-                                                    <h5 class="mb-1 font-size-15 text-truncate">Mark Evans</h5>
-                                                    <a href="#" class="text-muted">@Skote</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <a href="invoices-detail.html" class="d-block mb-2">Invoice #14255</a>
-                                                    <h5 class="text-truncate mb-4 mb-lg-5">Blog Template Design</h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Amount"><i class="bx bx-money mr-1 text-primary"></i> $ 1024</h5>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Due Date"><i class="bx bx-calendar mr-1 text-primary"></i> 11 Oct, 19</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-center">
-                                                    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
-                                                        <span class="avatar-title rounded-circle bg-soft-info text-info font-size-16">
-                                                            T
-                                                        </span>
-                                                    </div>
-                                                    <h5 class="mb-1 font-size-15 text-truncate">Timothy Lee</h5>
-                                                    <a href="#" class="text-muted">@Skote</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <a href="invoices-detail.html" class="d-block mb-2">Invoice #14256</a>
-                                                    <h5 class="text-truncate mb-4 mb-lg-5">Landing page Design</h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Amount"><i class="bx bx-money mr-1 text-primary"></i> $ 1189</h5>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Due Date"><i class="bx bx-calendar mr-1 text-primary"></i> 13 Oct, 19</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-center">
-                                                    <img src="assets/images/users/avatar-1.jpg" class="avatar-sm mr-3 rounded-circle mb-4 float-left float-lg-none" alt="img" />
-                                                    <h5 class="mb-1 font-size-15 text-truncate">Stanley Bland</h5>
-                                                    <a href="#" class="text-muted">@Skote</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <a href="invoices-detail.html" class="d-block text-primary mb-2">Invoice #14257</a>
-                                                    <h5 class="text-truncate mb-4 mb-lg-5">Landing page UI</h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Amount"><i class="bx bx-money mr-1 text-primary"></i> $ 1148</h5>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Due Date"><i class="bx bx-calendar mr-1 text-primary"></i> 14 Oct, 19</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-center">
-                                                    <div class="avatar-sm mr-3 mx-lg-auto mb-4 float-left float-lg-none">
-                                                        <span class="avatar-title rounded-circle bg-soft-success text-success font-size-16">
-                                                            T
-                                                        </span>
-                                                    </div>
-                                                    <h5 class="mb-1 font-size-15 text-truncate">Tommy Wilson</h5>
-                                                    <a href="#" class="text-muted">@Skote</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <a href="invoices-detail.html" class="d-block mb-2">Invoice #14258</a>
-                                                    <h5 class="text-truncate mb-4 mb-lg-5">Redesign - Dashboard</h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Amount"><i class="bx bx-money mr-1 text-primary"></i> $ 1259</h5>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Due Date"><i class="bx bx-calendar mr-1 text-primary"></i> 15 Oct, 19</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-center">
-                                                    <img src="assets/images/users/avatar-4.jpg" class="avatar-sm mr-3 rounded-circle mb-4 float-left float-lg-none" alt="img" />
-                                                    <h5 class="mb-1 font-size-15 text-truncate">Louis Brandon</h5>
-                                                    <a href="#" class="text-muted">@Skote</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-8">
-                                                <div>
-                                                    <a href="invoices-detail.html" class="d-block mb-2">Invoice #14259</a>
-                                                    <h5 class="text-truncate mb-4 mb-lg-5">Email Template UI</h5>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Amount"><i class="bx bx-money mr-1 text-primary"></i> $ 1355</h5>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <h5 class="font-size-14" data-toggle="tooltip" data-placement="top" title="Due Date"><i class="bx bx-calendar mr-1 text-primary"></i> 15 Oct, 19</h5>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <!-- end row -->
-
+                        
                         <div class="row">
                             <div class="col-12">
-                                <div class="text-center my-3">
-                                    <a href="javascript:void(0);" class="text-success"><i class="bx bx-loader bx-spin font-size-18 align-middle mr-2"></i> Load more </a>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-sm-4">
+                                                <div class="search-box mr-2 mb-2 d-inline-block">
+                                                    <div class="position-relative">
+                                                        <input type="text" class="form-control" placeholder="Search...">
+                                                        <i class="bx bx-search-alt search-icon"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-sm-8"> -->
+                                               
+                                            <!-- </div> end col-sm-8 -->
+                                        </div>
+                <form action="{{route('bill')}}" method="post">
+                @csrf
+                    <div class="table-responsive">
+                                            <table class="table table-centered table-nowrap">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th style="width: 20px;">
+                                                            Select
+                                                            </div>
+                                                        </th>
+                                                        <th>Product ID</th>
+                                                        <th>Product Name</th>
+                                                        <th>Product Price</th>
+                                                        <th>Quantity</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                               @foreach($products as $product)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox"  name="productIds[]" value={{$product->id}}>
+                                                                <!-- <label class="custom-control-label" for="customCheck2">&nbsp;</label> -->
+                                                            </div>
+                                                        </td>
+                                                        <td>{{$product->id}}</td>
+                                                        <td>{{$product->title}}</td>
+                                                        <td>{{$product->sale_price}}</td>
+                                                        <!-- <td><input type="number" name="quantity[]" ></td> -->
+                                                        
+                                                    </tr>
+
+                                               @endforeach
+                                                </tbody>
+                                            </table>
+                                            <div class="form-group">
+                                                        <label for="productname">Discount</label>
+                                                        <input id="productname" name="discount" type="number" class="form-control">
+                                            </div>
+                                            <input type="hidden" name="customerId" value={{$customer->id}}>
+                                            <div class="text-sm-right">
+                                                    <button type="submit" class="btn btn-success btn-rounded">Buy products</button>
+                                            </div>
+                    </div>
+
+                </form>
+                                        
+                                        <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                    <i class="mdi mdi-chevron-left"></i>
+                                                    </a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                    <i class="mdi mdi-chevron-right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div> <!-- end col-->
+                            </div>
                         </div>
                         <!-- end row -->
-
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
+
+                <!-- Modal -->
+                <div class="modal fade exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
+                                <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
+
+                                <div class="table-responsive">
+                                    <table class="table table-centered table-nowrap">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
+                                                        <p class="text-muted mb-0">$ 225 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 255</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-4.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
+                                                        <p class="text-muted mb-0">$ 145 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 145</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Sub Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Shipping:</h6>
+                                                </td>
+                                                <td>
+                                                    Free
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 
                 <footer class="footer">
@@ -1155,10 +1028,11 @@
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
-
+        
+        <!-- App js -->
         <script src="assets/js/app.js"></script>
 
     </body>
 
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/invoices-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:56:05 GMT -->
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/ecommerce-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Nov 2020 06:55:47 GMT -->
 </html>
