@@ -40,8 +40,8 @@ class AdminController extends Controller
         $customer = User::where('cnic', '=', $request->cnic)->get()->first();
         if($customer)
         {
-            return "customer already exists, please click on 'existing
-            customer' button";
+            return "CNIC already exists, please click on 'existing
+            customer' button or enter new CNIC";
         }
         else{
             $customer = new User();

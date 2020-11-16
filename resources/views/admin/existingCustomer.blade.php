@@ -50,7 +50,7 @@
                                     </span>
                                 </a>
 
-                                <a href="index.html" class="logo logo-light">
+                                <a href="{{url('/admin')}}" class="logo logo-light">
                                     <span class="logo-sm">
                                         <img src="assets/images/logo-light.svg" alt="" height="22">
                                     </span>
@@ -71,8 +71,8 @@
                     </div>
                 </header>
 
-       <!-- ========== Left Sidebar Start ========== -->
-       <div class="vertical-menu">
+<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
 
 <div data-simplebar class="h-100">
 
@@ -81,8 +81,6 @@
         <!-- Left Menu Start -->
         <ul class="metismenu list-unstyled" id="side-menu">
             <li class="menu-title" key="t-menu">Menu</li>
-
-
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-store"></i>
@@ -91,33 +89,12 @@
                 <ul class="sub-menu" aria-expanded="false">
                     <li><a href="{{route('viewProducts')}}" key="t-add-product">Add Product</a></li>
                     <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li>
-                    <li><a href="{{route('viewSale')}}" key="t-add-product">Sales</a></li>
-                    <li><a href="/views/vertical/ecommerce-products.blade.php" key="t-products">Products</a></li>
-                    <li><a href="ecommerce-product-detail.html" key="t-product-detail">Product Detail</a></li>
+                    <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
+                    <li><a href="{{route('products')}}" key="t-products">Products</a></li>
                     <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
-                    <li><a href="ecommerce-cart.html" key="t-cart">Cart</a></li>
-                    <li><a href="ecommerce-checkout.html" key="t-checkout">Checkout</a></li>
+                   
                 </ul>
             </li>
-
-            
-
-
-            <li class="menu-title" key="t-pages">Pages</li>
-
-            <li>
-                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                    <i class="bx bx-user-circle"></i>
-                    <span key="t-authentication">Authentication</span>
-                </a>
-                <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="auth-login.html" key="t-login">Login</a></li>
-                    <li><a href="auth-register.html" key="t-register">Register</a></li>
-                    <li><a href="auth-recoverpw.html" key="t-recover-password">Recover Password</a></li>
-                    <li><a href="auth-lock-screen.html" key="t-lock-screen">Lock Screen</a></li>
-                </ul>
-            </li>
-
 
         </ul>
     </div>
@@ -125,7 +102,6 @@
 </div>
 </div>
 <!-- Left Sidebar End -->
-
             
 
             <!-- ============================================================== -->
