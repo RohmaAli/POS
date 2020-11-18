@@ -7,6 +7,7 @@ use App\Product;
 use App\Purchase;
 use App\Sale;
 use App\User;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -69,34 +70,194 @@ class AdminController extends Controller
         }
     }
 
-    public function viewStoreProducts()
+    public function viewProducts()
     {
         
         $sizes = Size::all();
-        // return view('admin.addProducts', compact('sizes'));
-        return view('vertical.ecommerce-add-product', compact('sizes'));
+        $products = Product::all();
+        return view('vertical.products', compact('sizes','products'));
 
     }
-    
-    public function StoreProducts(Request $request)
+    public function productActions(Request $request) //new
     {
-        $product = new Product();
-        $product->title = $request->ProductTitle;
-        $product->sale_price = $request->price;
-        $product->save();
-         $size = new Size();
-         $size->title = $request->sizeTitle;
-         $size->width = $request->width;
-         $size->length = $request->length;
-         $size->product_id = $product->id;
-         $size->save();
+        // return $request;
+        if($request->addProduct != null)
+        {
+            return view('admin.addProducts');
+        }
+        elseif($request->edit != null)
+        {
+            $sizes = Size::all();
+            $weights = Weight::all();
+            $product = Product::find($request->edit);
+            return view('admin.editProduct', compact('product', 'sizes', 'weights'));
+        }
+        elseif($request->delete != null)
+        {
+            $product = Product::find($request->edit);
+            $product->delete();
+            return redirect()->route('viewProducts');
 
-         $weight = new Weight();
-         $weight->unit = $request->unit;
-         $weight->total_weight = $request->totalWeight;
-         $weight->product_id = $product->id;
-         $weight->save();
-        return redirect()->route('viewProducts');
+        }
+
+    }
+
+    public function viewWeights() //new
+    {
+        $weights = Weight::all();
+        return view('admin.viewWeights', compact('weights'));
+    }
+
+    public function storeWeights(Request $request)
+    {
+        $weight = new Weight();
+        $weight->total_weight = $request->total_weight;
+        $weight->unit = $request->unit;
+        $weight->save();
+        return redirect()->route('viewWeights');
+    }
+    public function weightActions(Request $request)  //new
+    {
+        if($request->addWeight != null)
+        {
+            return view('admin.addWeight');
+        }
+        elseif($request->edit != null)
+        {
+            $weight = Weight::find($request->edit);
+            return view('admin.editWeight', compact('weight'));
+        }
+        elseif($request->delete != null)
+        {
+            $weight = Weight::find($request->delete);
+            $weight->delete();
+            return redirect()->route('viewWeights');
+
+        }
+    }
+    public function editWeight(Request $request) //new
+    {
+       $weight = Weight::find($request->editWeight);
+       $weight->total_weight = $request->total_weight;
+       $weight->unit = $request->unit;
+       $weight->save();
+       return redirect()->route('viewWeights');
+
+    }
+    public function viewSizes() //new
+    {
+        $sizes = Size::all();
+        return view('admin.viewSizes', compact('sizes'));
+    }
+
+    public function sizeActions(Request $request)  //new
+    {
+        if($request->addSize != null)
+        {
+            return view('admin.addSizes');
+        }
+        elseif($request->edit != null)
+        {
+            $size = Size::find($request->edit);
+            return view('admin.editSize', compact('size'));
+        }
+        elseif($request->delete != null)
+        {
+            $size = Size::find($request->delete);
+            $size->delete();
+            return redirect()->route('viewSizes');
+
+        }
+    }
+    public function editSizes(Request $request) //new
+    {
+       $size = Size::find($request->editSize);
+       $size->title = $request->sizeTitle;
+       $size->width = $request->width;
+       $size->length = $request->length;
+       $size->save();
+       return redirect()->route('viewSizes');
+
+    }
+
+     public function storeSizes(Request $request) //new
+     {
+        $size = new Size();
+        $size->title = $request->sizeTitle;
+        $size->width = $request->width;
+        $size->length = $request->length;
+        $size->save();
+        return redirect()->route('viewSizes');
+     }
+
+     public function viewCustomers() //new
+     {
+        $customers = Customer::all();
+        return view('admin.viewCustomers',compact('customers'));
+     }
+
+     public function customerActions(Request $request)
+     {
+        if($request->addCustomer != null)
+        {
+            return view('admin.addCustomer');
+        }
+        elseif($request->edit != null)
+        {
+            $customer = Customer::find($request->edit);
+            return view('admin.editCustomer', compact('customer'));
+        }
+        elseif($request->delete != null)
+        {
+            $customer = Customer::find($request->delete);
+            $customer->delete();
+            return redirect()->route('viewCustomers');
+
+        }
+        elseif($request->view != null)
+        {
+            $customer = Customer::find($request->delete);
+            return view('admin.customerDetail', compact('customer'));
+
+        }
+     }
+     public function storeCustomer(Request $request)
+     {
+         $customer = new Customer();
+         $customer->name = $request->name;
+         $customer->phone = $request->phone;
+         $customer->save();
+         return redirect()->route('viewCustomers');
+     }
+     public function editCustomer(Request $request)
+     {
+         $customer = Customer::find($request->editCustomer);
+         $customer->name = $request->name;
+         $customer->phone = $request->phone;
+         $customer->save();
+         return redirect()->route('viewCustomers');
+     }
+
+    
+    // public function StoreProducts(Request $request)
+    // {
+    //     $product = new Product();
+    //     $product->title = $request->ProductTitle;
+    //     $product->sale_price = $request->price;
+    //     $product->save();
+    //      $size = new Size();
+    //      $size->title = $request->sizeTitle;
+    //      $size->width = $request->width;
+    //      $size->length = $request->length;
+    //      $size->product_id = $product->id;
+    //      $size->save();
+
+    //      $weight = new Weight();
+    //      $weight->unit = $request->unit;
+    //      $weight->total_weight = $request->totalWeight;
+    //      $weight->product_id = $product->id;
+    //      $weight->save();
+    //     return redirect()->route('viewProducts');
         
         //    return $request;
             // $product = new Product();
@@ -112,7 +273,37 @@ class AdminController extends Controller
             // return view('admin.addProducts');
         
        
-    }
+    // }
+    // public function editProducts(Request $request)
+    // {
+    //     $product = Product::find($request->edit);
+    //     $product->title = $request->ProductTitle;
+    //     $product->sale_price = $request->price;
+    //     $product->save();
+    //     $size = Size::find($request->size);
+    //     $size->product_id = $product->id;
+    //     $size->save();
+    //     $weight = Weight::find($request->weight);
+    //     $weight->product_id = $product->id;
+    //     $weight->save();
+
+        //  $size = new Size();
+        //  $size->title = $request->sizeTitle;
+        //  $size->width = $request->width;
+        //  $size->length = $request->length;
+        //  $size->product_id = $product->id;
+        //  $size->save();
+
+        //  $weight = new Weight();
+        //  $weight->unit = $request->unit;
+        //  $weight->total_weight = $request->totalWeight;
+        //  $weight->product_id = $product->id;
+        //  $weight->save();
+        // return redirect()->route('viewProducts');
+        
+      
+       
+    // }
 
     public function viewPurchasing()
     {
@@ -204,9 +395,9 @@ class AdminController extends Controller
         
     }
 
-    public function viewProducts()
-    {
-        $products = Product::all();
-        return view('admin.products', compact('products'));
-    }
+    // public function viewProducts()
+    // {
+    //     $products = Product::all();
+    //     return view('admin.products', compact('products'));
+    // }
 }

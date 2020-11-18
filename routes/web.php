@@ -17,8 +17,23 @@ Route::get('/', function () {
 
 //admin 
 Route::get('/admin','AdminController@view')->name('admin');
-Route::get('/view/storeProducts','AdminController@viewStoreProducts')->name('viewProducts');
+Route::get('/view/Products','AdminController@viewProducts')->name('viewProducts');
+Route::post('/actions/products', 'AdminController@productActions')->name('productActions');
 Route::post('/store/products','AdminController@storeProducts')->name('store');
+Route::post('/edit/products','AdminController@editProducts')->name('editProduct');
+Route::get('/view/sizes','AdminController@viewSizes')->name('viewSizes');
+Route::post('/actions/sizes', 'AdminController@sizeActions')->name('sizeActions');
+Route::post('/store/sizes','AdminController@storeSizes')->name('storeSize');
+Route::post('/edit/sizes','AdminController@editSizes')->name('editSize');
+Route::get('/view/weights','AdminController@viewWeights')->name('viewWeights');
+Route::post('/actions/weight', 'AdminController@weightActions')->name('weightActions');
+Route::post('/store/weight','AdminController@storeWeights')->name('storeWeight');
+Route::post('/edit/weights','AdminController@editWeight')->name('editWeight');
+Route::get('/view/customers','AdminController@viewCustomers')->name('viewCustomers');
+Route::post('/actions/customer', 'AdminController@customerActions')->name('customerActions');
+Route::post('/store/customer','AdminController@storeCustomer')->name('storeCustomer');
+Route::post('/edit/customer','AdminController@editCustomer')->name('editCustomer');
+
 Route::get('/view/purchasing','AdminController@viewPurchasing')->name('purchase');
 Route::get('/view/sale', 'AdminController@viewSale')->name('viewSale');
 Route::post('/calculate/bill', 'AdminController@calculateBill')->name('bill');

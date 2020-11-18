@@ -122,69 +122,44 @@
                                 <div class="card">
                                     <div class="card-body">
         
-                                        <h4 class="card-title">Basic Information</h4>
+                                        <!-- <h4 class="card-title">Basic Information</h4>
                                         <p class="card-title-desc">Fill all information below</p>
-        
-                                        <form action="{{route('actions')}}" method="post">
+         -->
+                                        <form action="{{route('weightActions')}}" method="post">
                                             @csrf
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="productname">Product Name</label>
-                                                        <input id="productname" name="ProductTitle" type="text" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="price">Price</label>
-                                                        <input id="price" name="price" type="text" class="form-control">
-                                                    </div>
-                                                    <!-- <div class="form-group">
-                                                    <label for="size"> <b>Enter Size Detail</b> </label><br>
-                                                    <label id="size" for="size-title">Title </label><br>
-                                                    <input id="size-title" name="sizeTitle" type="text" class="form-control" placeholder="e.g(small/medium/large..)">
-                                                    <br>   
-                                                    <label id="size" for="width">Width</label><br>
-                                                    <input id="width" name="width" type="text" class="form-control" placeholder="">
-                                                    <br>  
-                                                    <label id="size" for="length">Length</label><br>
-                                                    <input id="length" name="length" type="text" class="form-control" placeholder="">
-                                                    <br>  
-                                                    </div> -->
+                                            <button type="submit" name="addWeight" class="btn btn-primary mr-1 waves-effect waves-light" value="1"><i class="fa fa-plus"></i> Add Weight</button>
 
-                                                    <!-- <div class="form-group">
-                                                    <label for="weight"> <b>Enter Weight Detail</b> </label><br>
-                                                    <label id="weight" for="weight-unit">Unit </label><br>
-                                                    <input id="weight-unit" name="unit" type="text" class="form-control" placeholder="e.g(kg/g/mg..)">
-                                                    <br>   
-                                                    <label for="total-weight">Net weight</label><br>
-                                                    <input id="total-weight" name="totalWeight" type="text" class="form-control" placeholder="">
-                                                  
-                                                    </div> -->
-                                                    <div class="form-group">
-                                                    <label for="size">Select size:</label>
-                                                    <select name="size" id="size">
-                                                    @foreach($sizes as $size)
-                                                        <option value="{{$size->id}}">{{$size->title}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                    <label for="weight">Select Weight:</label>
-                                                    <select name="weight" id="weight">
-                                                    @foreach($weights as $weight)
-                                                        <option value="{{$weight->id}}">{{$weight->total_weight}}{{$weight->unit}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    </div>
-
+                                        <div class="table-responsive">
+                   
+                                            <table class="table table-centered table-nowrap">
+                                                <thead class="thead-light">
                                                     
-                                                </div>
-        
-                                             
-                                            </div>
-        
-                                            <button type="submit" name="addProduct" class="btn btn-primary mr-1 waves-effect waves-light"><i class="fa fa-plus"></i> Add Product</button>
-                                        <br>
-                                       
+                                                    <tr>
+                                                        <th>Weight ID</th>
+                                                        <th>Total weight</th>
+                                                        <th>Unit</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($weights as $weight)
+                                                    <tr>
+                                                        <td>{{$weight->id}}</td>
+                                                        <td>{{$weight->total_weight}}</td>
+                                                        <td>{{$weight->unit}}</td>
+                                                        <td>
+                                                        <button class="btn" name="edit" value="{{$weight->id}}"><i class="fa fa-edit"></i></button>
+                                                        <button class="btn" name="delete" value="{{$weight->id}}"><i class="fa fa-trash"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+                                               
+                                                </tbody>
+                                            </table>
+                    
+                                            
+                    </div>
                     </form>
         
                                     </div>
@@ -251,4 +226,3 @@
     </body>
 
 </html>
-

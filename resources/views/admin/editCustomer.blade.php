@@ -76,7 +76,7 @@
                     <span key="t-ecommerce">Ecommerce</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="{{route('viewProducts')}}" key="t-add-product">Add Product</a></li>
+                    <li><a href="{{route('viewProducts')}}" key="t-add-product">Products</a></li>
                     <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li>
                     <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
                     <li><a href="{{route('products')}}" key="t-products">Products</a></li>
@@ -125,49 +125,41 @@
                                         <h4 class="card-title">Basic Information</h4>
                                         <p class="card-title-desc">Fill all information below</p>
         
-                                        <form action="{{route('store')}}" method="post">
+                                        <form action="{{route('editCustomer')}}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="productname">Product Name</label>
+                                                    <!-- <div class="form-group">
+                                                        <label for="productname">Size Name</label>
                                                         <input id="productname" name="ProductTitle" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="price">Price</label>
                                                         <input id="price" name="price" type="text" class="form-control">
-                                                    </div>
+                                                    </div> -->
                                                     <div class="form-group">
-                                                    <label for="size"> <b>Enter Size Detail</b> </label><br>
-                                                    <label id="size" for="size-title">Title </label><br>
-                                                    <input id="size-title" name="sizeTitle" type="text" class="form-control" placeholder="e.g(small/medium/large..)">
+                                                    <label for="size"> <b>Enter Customer Detail</b> </label><br>
+                                                    <label id="size" for="size-title">Name</label><br>
+                                                    <input id="size-title" name="name" type="text" class="form-control" value="{{$customer->name}}">
                                                     <br>   
-                                                    <label id="size" for="width">Width</label><br>
-                                                    <input id="width" name="width" type="text" class="form-control" placeholder="">
+                                                    <label id="size" for="width">Phone</label><br>
+                                                    <input id="width" name="phone" type="text" class="form-control" value="{{$customer->phone}}">
                                                     <br>  
-                                                    <label id="size" for="length">Length</label><br>
-                                                    <input id="length" name="length" type="text" class="form-control" placeholder="">
-                                                    <br>  
+                                                    
                                                     </div>
 
-                                                    <div class="form-group">
-                                                    <label for="weight"> <b>Enter Weight Detail</b> </label><br>
-                                                    <label id="weight" for="weight-unit">Unit </label><br>
-                                                    <input id="weight-unit" name="unit" type="text" class="form-control" placeholder="e.g(kg/g/mg..)">
-                                                    <br>   
-                                                    <label for="total-weight">Net weight</label><br>
-                                                    <input id="total-weight" name="totalWeight" type="text" class="form-control" placeholder="">
                                                   
-                                                    </div>
-                                                   
+
                                                     
                                                 </div>
         
                                              
                                             </div>
         
-                                            <button type="submit" name="addProduct" class="btn btn-primary mr-1 waves-effect waves-light">Save Changes</button>
-                                        </form>
+                                            <button type="submit" name="editCustomer" class="btn btn-primary mr-1 waves-effect waves-light" value="{{$customer->id}}">Save changes</button>
+                                        <br>
+                                       
+                    </form>
         
                                     </div>
                                 </div>
@@ -233,3 +225,4 @@
     </body>
 
 </html>
+

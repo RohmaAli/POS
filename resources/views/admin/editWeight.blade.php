@@ -125,64 +125,30 @@
                                         <h4 class="card-title">Basic Information</h4>
                                         <p class="card-title-desc">Fill all information below</p>
         
-                                        <form action="{{route('actions')}}" method="post">
+                                        <form action="{{route('editWeight')}}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-6">
+                                                   
                                                     <div class="form-group">
-                                                        <label for="productname">Product Name</label>
-                                                        <input id="productname" name="ProductTitle" type="text" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="price">Price</label>
-                                                        <input id="price" name="price" type="text" class="form-control">
-                                                    </div>
-                                                    <!-- <div class="form-group">
-                                                    <label for="size"> <b>Enter Size Detail</b> </label><br>
-                                                    <label id="size" for="size-title">Title </label><br>
-                                                    <input id="size-title" name="sizeTitle" type="text" class="form-control" placeholder="e.g(small/medium/large..)">
+                                                    <label for="size"> <b>Enter Weight Detail</b> </label><br>
+                                                    <label id="size" for="size-title">Total weight</label><br>
+                                                    <input id="size-title" name="total_weight" type="text" class="form-control" value="{{$weight->total_weight}}">
                                                     <br>   
-                                                    <label id="size" for="width">Width</label><br>
-                                                    <input id="width" name="width" type="text" class="form-control" placeholder="">
+                                                    <label id="size" for="width">Unit</label><br>
+                                                    <input id="width" name="unit" type="text" class="form-control" value="{{$weight->unit}}">
                                                     <br>  
-                                                    <label id="size" for="length">Length</label><br>
-                                                    <input id="length" name="length" type="text" class="form-control" placeholder="">
-                                                    <br>  
-                                                    </div> -->
-
-                                                    <!-- <div class="form-group">
-                                                    <label for="weight"> <b>Enter Weight Detail</b> </label><br>
-                                                    <label id="weight" for="weight-unit">Unit </label><br>
-                                                    <input id="weight-unit" name="unit" type="text" class="form-control" placeholder="e.g(kg/g/mg..)">
-                                                    <br>   
-                                                    <label for="total-weight">Net weight</label><br>
-                                                    <input id="total-weight" name="totalWeight" type="text" class="form-control" placeholder="">
-                                                  
-                                                    </div> -->
-                                                    <div class="form-group">
-                                                    <label for="size">Select size:</label>
-                                                    <select name="size" id="size">
-                                                    @foreach($sizes as $size)
-                                                        <option value="{{$size->id}}">{{$size->title}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                    <label for="weight">Select Weight:</label>
-                                                    <select name="weight" id="weight">
-                                                    @foreach($weights as $weight)
-                                                        <option value="{{$weight->id}}">{{$weight->total_weight}}{{$weight->unit}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    
                                                     </div>
 
+                                                   
                                                     
                                                 </div>
         
                                              
                                             </div>
         
-                                            <button type="submit" name="addProduct" class="btn btn-primary mr-1 waves-effect waves-light"><i class="fa fa-plus"></i> Add Product</button>
+                                            <button type="submit" name="editWeight" class="btn btn-primary mr-1 waves-effect waves-light" value="{{$weight->id}}"><i class="fa fa-plus"></i>Save Changes</button>
                                         <br>
                                        
                     </form>
