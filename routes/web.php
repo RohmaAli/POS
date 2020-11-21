@@ -33,6 +33,14 @@ Route::get('/view/customers','AdminController@viewCustomers')->name('viewCustome
 Route::post('/actions/customer', 'AdminController@customerActions')->name('customerActions');
 Route::post('/store/customer','AdminController@storeCustomer')->name('storeCustomer');
 Route::post('/edit/customer','AdminController@editCustomer')->name('editCustomer');
+Route::get('/view/dailyExpense','AdminController@viewDailyExpense')->name('viewDailyExpense');
+Route::post('/actions/expense', 'AdminController@expenseActions')->name('expenseActions');
+Route::post('/edit/expense','AdminController@editExpense')->name('editExpense');
+Route::post('/store/expense','AdminController@storeExpense')->name('storeExpense');
+Route::get('/view/sales', 'AdminController@viewSales')->name('viewSales');
+Route::get('/add-to-cart/{id}', 'AdminController@getAddToCart')->name('product.addtocart');
+Route::get('/shopping-cart', 'AdminController@getCart')->name('product.shoppingCart');
+Route::get('/remove/item/{id}', 'AdminController@removeItem')->name('products.remove');
 
 Route::get('/view/purchasing','AdminController@viewPurchasing')->name('purchase');
 Route::get('/view/sale', 'AdminController@viewSale')->name('viewSale');

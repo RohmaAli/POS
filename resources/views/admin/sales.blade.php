@@ -96,6 +96,9 @@
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
+            <div class="row">
+                
+            </div>
             <div class="main-content">
                 
                 <div class="page-content">
@@ -120,251 +123,154 @@
                         <!-- end page title -->
                         
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-6">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <div class="row mb-2">
-                                            <div class="col-sm-4">
-                                                <div class="search-box mr-2 mb-2 d-inline-block">
-                                                    <div class="position-relative">
-                                                        <input type="text" class="form-control" placeholder="Search...">
-                                                        <i class="bx bx-search-alt search-icon"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- <div class="col-sm-8"> -->
-                                               
-                                            <!-- </div> end col-sm-8 -->
-                                        </div>
-                <form action="{{route('bill')}}" method="post">
-                @csrf
+                                    
+               
+                
+                <a href="{{route('product.shoppingCart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Shopping cart
+                <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : "" }}</span>
+                </a>
                     <div class="table-responsive">
                                             <table class="table table-centered table-nowrap">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th style="width: 20px;">
+                                                        <!-- <th style="width: 20px;">
                                                             Select
                                                             </div>
-                                                        </th>
+                                                        </th> -->
                                                         <th>Product ID</th>
                                                         <th>Product Name</th>
                                                         <th>Product Price</th>
+                                                        <th>Action</th>
                                                         <!-- <th>Quantity</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                @foreach($products as $product)
+                                               <!-- <form action="{{route('product.addtocart',['id'=>$product->id])}}" method="get"> -->
+                @csrf
                                                     <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
+                                                        <!-- <td> -->
+                                                            <!-- <div class="custom-control custom-checkbox">
                                                                 <input type="checkbox"  name="productIds[]" value={{$product->id}}>
                                                                 <!-- <label class="custom-control-label" for="customCheck2">&nbsp;</label> -->
-                                                            </div>
-                                                        </td>
+                                                            <!-- </div> --> 
+                                                        <!-- </td> -->
                                                         <td>{{$product->id}}</td>
                                                         <td>{{$product->title}}</td>
                                                         <td>{{$product->sale_price}}</td>
+                                                        <!-- <td><button type="submit" name="productid" value="{{$product->id}}">Add to cart</button></td> -->
+                                                        <td>
+                                                            <a href="{{route('product.addtocart',['id'=>$product->id])}}" class="btn btn-success" role="button">Add To Cart</a>
+                                                        </td>
                                                         <!-- <td><input type="number" name="quantity[]" ></td> -->
                                                         
                                                     </tr>
-
+                                                    <!-- </form> -->
                                                @endforeach
                                                 </tbody>
                                             </table>
-                                            <div class="form-group">
-                                                        <label for="productname">Discount</label>
-                                                        <input id="productname" name="discount" type="number" class="form-control">
-                                            </div>
-                                            <input type="hidden" name="customerId" value={{$customer->id}}>
-                                            <div class="text-sm-right">
-                                                    <button type="submit" class="btn btn-success btn-rounded">Buy products</button>
-                                            </div>
+                                           
                     </div>
 
-                </form>
+                
                                         
-                                        <ul class="pagination pagination-rounded justify-content-end mb-2">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                                    <i class="mdi mdi-chevron-left"></i>
-                                                    </a>
-                                            </li>
-                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                       
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-                    </div> <!-- container-fluid -->
-                </div>
-                <!-- End Page-content -->
-
-                <!-- Modal -->
-                <div class="modal fade exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
-                                <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
-
+                            </div> <!--end col-md-8-->
+                            <div class="col-md-6">
+                                <div class="card">
+                                @if(Session::has('cart'))
+                               
                                 <div class="table-responsive">
                                     <table class="table table-centered table-nowrap">
                                         <thead>
                                             <tr>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Product Name</th>
-                                            <th scope="col">Price</th>
+                                                <th>Product</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div>
-                                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-sm">
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <div>
-                                                        <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
-                                                        <p class="text-muted mb-0">$ 225 x 1</p>
-                                                    </div>
-                                                </td>
-                                                <td>$ 255</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div>
-                                                        <img src="assets/images/product/img-4.png" alt="" class="avatar-sm">
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <div>
-                                                        <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
-                                                        <p class="text-muted mb-0">$ 145 x 1</p>
-                                                    </div>
-                                                </td>
-                                                <td>$ 145</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h6 class="m-0 text-right">Sub Total:</h6>
-                                                </td>
-                                                <td>
-                                                    $ 400
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h6 class="m-0 text-right">Shipping:</h6>
-                                                </td>
-                                                <td>
-                                                    Free
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h6 class="m-0 text-right">Total:</h6>
-                                                </td>
-                                                <td>
-                                                    $ 400
-                                                </td>
-                                            </tr>
+                                            @foreach($cart->items as $item)
+                                                <tr>
+                                                   <td>{{$item['item']['title']}}</td>
+                                                   <td>{{$item['qty']}}</td>
+                                                   <td>{{$item['price']}}</td>
+                                                   <td>
+                                                   <!-- <input type="hidden" > -->
+                                                   @php
+                                                        $itemId = $item['item']['id'];
+                                                   @endphp
+                                                   <a href="{{route('products.remove',['id' => $itemId])}}">remove 1</a>
+                                                   <!-- <div class="btn-group">
+                                                   <button type="button" class="btn btn-primary btn-xs dropdown-toogle" data-toogle="dropdown">Action<span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                        <li>remove 1</li>
+                                                        <li>remove all</li>
+                                                        </ul> -->
+
+                                                   <!-- </div>  -->
+
+                                                   </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
+                                       
                                     </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                   
+                                    <div class="form-group">
+                                                        <label for="productname">Sub Total</label>
+                                                        <input id="productname" name="subtotal" type="text" class="form-control" readonly placeholder={{$cart->totalPrice}}  >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="discount">Discount</label>
+                                                        <input id="discount" name="discount" type="text" class="form-control" >
+                                                    </div>
+                                                   
+                                                   
+                                                    <div class="form-group">
+                                                        <label for="price">Payment recieved</label>
+                                                        <input id="price" name="recieve" type="number" class="form-control" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                    <a href=" " name="checkout" type="button" class="form-control btn btn-primary">checkout</a>
+                                                        
+                                                        
+                                                    </div>
+                                                    
+                                    
+                                </div> <!--end table-responsive-->
+
+                                @else
+                                Cart is empty
+                                @endif
+                                
+                                </div> <!--end card-->
+
+
+                            </div> <!--end col-md-4-->
+                        </div> <!-- end row -->
+                        
+                    </div> <!-- container-fluid -->
+                </div>  <!-- End Page-content -->
+               
+
+                <!-- Modal -->
+                
 
                 
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <script>document.write(new Date().getFullYear())</script> © Skote.
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="text-sm-right d-none d-sm-block">
-                                    Design & Develop by Themesbrand
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+               
             </div>
             <!-- end main content-->
 
         </div>
         <!-- END layout-wrapper -->
 
-        <!-- Right Sidebar -->
-        <div class="right-bar">
-            <div data-simplebar class="h-100">
-                <div class="rightbar-title px-3 py-4">
-                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                        <i class="mdi mdi-close noti-icon"></i>
-                    </a>
-                    <h5 class="m-0">Settings</h5>
-                </div>
-
-                <!-- Settings -->
-                <hr class="mt-0" />
-                <h6 class="text-center mb-0">Choose Layouts</h6>
-
-                <div class="p-4">
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-                        <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css" />
-                        <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-5">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="assets/css/app-rtl.min.css" />
-                        <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                    </div>
-
-            
-                </div>
-
-            </div> <!-- end slimscroll-menu-->
-        </div>
-        <!-- /Right-bar -->
-
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
         <script src="assets/libs/jquery/jquery.min.js"></script>

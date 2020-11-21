@@ -15,8 +15,9 @@ class CreateDailyExpensesTable extends Migration
     {
         Schema::create('daily_expenses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id')->nullable();
-            $table->string('amount')->nullable();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->double('amount')->nullable();
 
             $table->timestamps();
         });

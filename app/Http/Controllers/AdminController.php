@@ -6,9 +6,12 @@ use App\Weight;
 use App\Product;
 use App\Purchase;
 use App\Sale;
+use App\Cart;
 use App\User;
 use App\Customer;
+use App\DailyExpense;
 use Illuminate\Http\Request;
+use Session;
 
 class AdminController extends Controller
 {
@@ -217,11 +220,60 @@ class AdminController extends Controller
         elseif($request->view != null)
         {
             $customer = Customer::find($request->delete);
-            return view('admin.customerDetail', compact('customer'));
+            return view('admin.customerDetails', compact('customer'));
 
         }
      }
-     public function storeCustomer(Request $request)
+     public function viewDailyExpense()
+     {
+         $dailyexpenses = DailyExpense::all();
+        //  return $dailyexpenses;
+         return view('admin.viewDailyExpens', compact('dailyexpenses'));
+     }
+     public function expenseActions(Request $request)
+     {
+        if($request->addexpense != null)
+        {
+            return view('admin.addExpense');
+        }
+        elseif($request->edit != null)
+        {
+            $expense =DailyExpense::find($request->edit);
+            return view('admin.editExpense', compact('expense'));
+        }
+        elseif($request->delete != null)
+        {
+            $expense = DailyExpense::find($request->delete);
+            $expense->delete();
+            return redirect()->route('viewDailyExpense');
+
+        }
+        elseif($request->view != null)
+        {
+            $customer = Customer::find($request->delete);
+            return view('admin.customerDetails', compact('customer'));
+
+        }
+     }
+     public function editExpense(Request $request)
+     {
+         $expense = DailyExpense::find($request->editExpense);
+         $expense->title = $request->title;
+         $expense->amount = $request->amount;
+         $expense->description = $request->description;
+         $expense->save();
+         return redirect()->route('viewDailyExpense');
+     }
+     public function storeExpense(Request $request) //new
+     {
+         $expense = new DailyExpense();
+         $expense->title = $request->title;
+         $expense->amount = $request->amount;
+         $expense->description = $request->description;
+         $expense->save();
+         return redirect()->route('viewDailyExpense');
+     }
+     public function storeCustomer(Request $request) //new
      {
          $customer = new Customer();
          $customer->name = $request->name;
@@ -237,6 +289,83 @@ class AdminController extends Controller
          $customer->save();
          return redirect()->route('viewCustomers');
      }
+     public function viewSales()
+     {
+         $products = Product::all();
+         $customers = Customer::all();
+         if(Session::has('cart'))
+        {
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+            // $products = $cart->items;
+            // $totalPrice = $cart->totalPrice;
+        }
+         return view('admin.sales',compact('products','customers','cart'));
+     }
+     public function removeItem(Request $request, $id)
+     {
+        
+        if(Session::has('cart'))
+        {
+            
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+            // dd($cart);
+            // foreach($cart->items as $item)
+            // {
+                
+            //     if($item['item']['id'] == $id)
+            //     {
+            //         $item['qty'] = $item['qty'] - 1;
+            //         $item['price'] = $item['qty'] * $item['price'];
+            //         // return $item['price'];    
+            //         $request->session()->put('cart', $cart);
+            //     }
+            // }
+            foreach($cart as $key=>$item)
+            {
+                $cart->{$key}->item['qty'] = $cart->{$key}->item['qty'] - 1;
+                $cart->{$key}->item['price'] = $cart->{$key}->item['price'] * $cart->{$key}->item['qty'];
+                return $cart->{$key}->item['qty'];
+            }
+            // $cart = Session::get('cart');
+            dd($cart);
+            
+        }
+        $products = Product::all();
+        return view('admin.sales', compact('cart','products'));
+
+     }
+     public function getAddToCart(Request $request, $id) //new
+     {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        // dd($oldCart) ;
+        // Session::flush();
+        //         dd($oldCart) ;
+
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+        $request->session()->put('cart', $cart);
+        // dd($request->session()->get('cart'));
+        // return redirect()->back();
+        // if(Session::has('cart'))
+        // {
+        //     $oldCart = Session::get('cart');
+        //     $cart = new Cart($oldCart);
+            
+        // }
+        $products = Product::all();
+
+        return view('admin.sales', compact('cart','products'));
+     }
+
+     public function getCart()
+     {
+
+     }
+
+   
 
     
     // public function StoreProducts(Request $request)
