@@ -87,7 +87,7 @@
 
                     <!-- <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li> -->
                     <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
-                    <li><a href="{{route('products')}}" key="t-products">Products</a></li>
+                    <!-- <li><a href="{{route('products')}}" key="t-products">Products</a></li> -->
                     <!-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li> -->
                    
                 </ul>
@@ -161,7 +161,7 @@
                                                     @endif
                                                     </div>
 
-                                                    
+
                                                     <div class="form-group">
                                                     <label for="weight">Select Weight:</label>
                                                     @if(count($weights) > 0 )

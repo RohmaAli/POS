@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('customer.dashboard');
+    // return view('customer.dashboard');
+    return redirect()->route('admin');
 });
 
 //admin 
@@ -45,6 +46,9 @@ Route::post('/total', 'AdminController@total')->name('products.total');
 Route::post('/payment/recieved','AdminController@storeAmount')->name('amountRecieved');
 Route::get('/sale/{id}', 'AdminController@sale')->name('products.sale');
 
+
+
+//////////////////////////////////////old routes///////////////////////////////////////////////
 Route::get('/view/purchasing','AdminController@viewPurchasing')->name('purchase');
 Route::get('/view/sale', 'AdminController@viewSale')->name('viewSale');
 Route::post('/calculate/bill', 'AdminController@calculateBill')->name('bill');
