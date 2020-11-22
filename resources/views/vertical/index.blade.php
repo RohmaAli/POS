@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Dashboard | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -70,10 +70,10 @@
                                         <li><a href="{{route('viewCustomers')}}" key="t-add-product">Customers</a></li>
                                         <li><a href="{{route('viewDailyExpense')}}" key="t-add-product">Daily Expense</a></li>
 
-                                        <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li>
+                                        <!-- <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li> -->
                                         <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
-                                        <li><a href="{{route('products')}}" key="t-products">Products</a></li>
-                                        <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
+                                        <!-- <li><a href="{{route('products')}}" key="t-products">Products</a></li> -->
+                                        <!-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li> -->
                                        
                                     </ul>
                                 </li>
@@ -141,8 +141,8 @@
                                                 <div class="card-body">
                                                     <div class="media">
                                                         <div class="media-body">
-                                                            <p class="text-muted font-weight-medium">Revenue</p>
-                                                            <h4 class="mb-0"><I>--</I></h4>
+                                                            <p class="text-muted font-weight-medium">Amount Recieved</p>
+                                                            <h4 class="mb-0">{{$amountRecieved}}</h4>
                                                         </div>
 
                                                         <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
@@ -159,8 +159,8 @@
                                                 <div class="card-body">
                                                     <div class="media">
                                                         <div class="media-body">
-                                                            <p class="text-muted font-weight-medium">Total products</p>
-                                                            <h4 class="mb-0">{{$totalProducts}}</h4>
+                                                            <p class="text-muted font-weight-medium">Amount Credit</p>
+                                                            <h4 class="mb-0">{{$amountCredit}}</h4>
                                                         </div>
 
                                                         <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
@@ -185,14 +185,13 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <h4 class="mb-0 font-size-18">Choose Customer</h4> <br>
-                                                <button type="submit" name="existing"  class="form-control btn btn-success mr-1 waves-effect waves-light" value='1'>Existing Customer</button>
+                                        
                                             </div> 
-                                            <div class="form-group">
-                                                <button type="submit" name="new" class="form-control btn btn-success mr-1 waves-effect waves-light" value='2'>New Customer</button>
-                                            </div>
+                                            
                                         </div> <!-- end col-md-12-->
                                     </div> <!--end xl-->
-                                </div> <!--end-row-->
+                                </div> 
+                                <!--end-row-->
                             <!-- end row -->
                             </form> 
                             <div class="row">

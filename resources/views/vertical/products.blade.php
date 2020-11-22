@@ -70,17 +70,25 @@
         <!-- Left Menu Start -->
         <ul class="metismenu list-unstyled" id="side-menu">
             <li class="menu-title" key="t-menu">Menu</li>
+
+
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-store"></i>
                     <span key="t-ecommerce">Ecommerce</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{route('viewSales')}}" key="t-add-product">Sales</a></li>
                     <li><a href="{{route('viewProducts')}}" key="t-add-product">Products</a></li>
-                    <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li>
-                    <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
-                    <li><a href="{{route('products')}}" key="t-products">Products</a></li>
-                    <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
+                    <li><a href="{{route('viewSizes')}}" key="t-add-product">Sizes</a></li>
+                    <li><a href="{{route('viewWeights')}}" key="t-add-product">Weights</a></li>
+                    <li><a href="{{route('viewCustomers')}}" key="t-add-product">Customers</a></li>
+                    <li><a href="{{route('viewDailyExpense')}}" key="t-add-product">Daily Expense</a></li>
+
+                    <!-- <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li> -->
+                    <!-- <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li> -->
+                    <!-- <li><a href="{{route('products')}}" key="t-products">Products</a></li> -->
+                    <!-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li> -->
                    
                 </ul>
             </li>
@@ -91,6 +99,7 @@
 </div>
 </div>
 <!-- Left Sidebar End -->
+
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->

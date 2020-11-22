@@ -10,8 +10,8 @@ class Sale extends Model
     {
         return $this->belongsToMany('App\Product');
     }
-    public function users()
+    public function customers()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsTo('App\Customer');
     }
 }

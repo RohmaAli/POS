@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/admin','AdminController@view')->name('admin');
 Route::get('/view/Products','AdminController@viewProducts')->name('viewProducts');
 Route::post('/actions/products', 'AdminController@productActions')->name('productActions');
-Route::post('/store/products','AdminController@storeProducts')->name('store');
+Route::post('/store/products','AdminController@storeProducts')->name('storeProducts');
 Route::post('/edit/products','AdminController@editProducts')->name('editProduct');
 Route::get('/view/sizes','AdminController@viewSizes')->name('viewSizes');
 Route::post('/actions/sizes', 'AdminController@sizeActions')->name('sizeActions');
@@ -41,6 +41,9 @@ Route::get('/view/sales', 'AdminController@viewSales')->name('viewSales');
 Route::get('/add-to-cart/{id}', 'AdminController@getAddToCart')->name('product.addtocart');
 Route::get('/shopping-cart', 'AdminController@getCart')->name('product.shoppingCart');
 Route::get('/remove/item/{id}', 'AdminController@removeItem')->name('products.remove');
+Route::post('/total', 'AdminController@total')->name('products.total');
+Route::post('/payment/recieved','AdminController@storeAmount')->name('amountRecieved');
+Route::get('/sale/{id}', 'AdminController@sale')->name('products.sale');
 
 Route::get('/view/purchasing','AdminController@viewPurchasing')->name('purchase');
 Route::get('/view/sale', 'AdminController@viewSale')->name('viewSale');

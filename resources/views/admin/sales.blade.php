@@ -31,6 +31,13 @@
 
     
     <body data-sidebar="dark">
+    <style>
+    option { 
+    background-color: color; 
+    border-radius: value; 
+    font-size: value 
+}
+    </style>
 
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
@@ -71,17 +78,25 @@
         <!-- Left Menu Start -->
         <ul class="metismenu list-unstyled" id="side-menu">
             <li class="menu-title" key="t-menu">Menu</li>
+
+
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-store"></i>
                     <span key="t-ecommerce">Ecommerce</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="{{route('viewProducts')}}" key="t-add-product">Add Product</a></li>
-                    <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li>
+                <li><a href="{{route('viewSales')}}" key="t-add-product">Sales</a></li>
+                    <li><a href="{{route('viewProducts')}}" key="t-add-product">Products</a></li>
+                    <li><a href="{{route('viewSizes')}}" key="t-add-product">Sizes</a></li>
+                    <li><a href="{{route('viewWeights')}}" key="t-add-product">Weights</a></li>
+                    <li><a href="{{route('viewCustomers')}}" key="t-add-product">Customers</a></li>
+                    <li><a href="{{route('viewDailyExpense')}}" key="t-add-product">Daily Expense</a></li>
+
+                    <!-- <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li> -->
                     <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
-                    <li><a href="{{route('products')}}" key="t-products">Products</a></li>
-                    <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
+                    <!-- <li><a href="{{route('products')}}" key="t-products">Products</a></li> -->
+                    <!-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li> -->
                    
                 </ul>
             </li>
@@ -91,7 +106,8 @@
     <!-- Sidebar -->
 </div>
 </div>
-<!-- Left Sidebar End -->    
+<!-- Left Sidebar End -->
+
 
             <!-- ============================================================== -->
             <!-- Start right Content here -->
@@ -103,6 +119,7 @@
                 
                 <div class="page-content">
                     <div class="container-fluid">
+                    
 
                         <!-- start page title -->
                         <div class="row">
@@ -128,17 +145,14 @@
                                     
                
                 
-                <a href="{{route('product.shoppingCart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Shopping cart
+                <!-- <a href="{{route('product.shoppingCart')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Shopping cart
                 <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : "" }}</span>
-                </a>
+                </a> -->
                     <div class="table-responsive">
                                             <table class="table table-centered table-nowrap">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <!-- <th style="width: 20px;">
-                                                            Select
-                                                            </div>
-                                                        </th> -->
+                                                       
                                                         <th>Product ID</th>
                                                         <th>Product Name</th>
                                                         <th>Product Price</th>
@@ -151,12 +165,7 @@
                                                <!-- <form action="{{route('product.addtocart',['id'=>$product->id])}}" method="get"> -->
                 @csrf
                                                     <tr>
-                                                        <!-- <td> -->
-                                                            <!-- <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox"  name="productIds[]" value={{$product->id}}>
-                                                                <!-- <label class="custom-control-label" for="customCheck2">&nbsp;</label> -->
-                                                            <!-- </div> --> 
-                                                        <!-- </td> -->
+                                                       
                                                         <td>{{$product->id}}</td>
                                                         <td>{{$product->title}}</td>
                                                         <td>{{$product->sale_price}}</td>
@@ -222,27 +231,37 @@
                                         </tbody>
                                        
                                     </table>
-                                   
-                                    <div class="form-group">
-                                                        <label for="productname">Sub Total</label>
-                                                        <input id="productname" name="subtotal" type="text" class="form-control" readonly placeholder={{$cart->totalPrice}}  >
+                                   <form action="{{route('products.total')}}" method= "post">
+                                   @csrf
+                                   <div class="form-group">
+                                   <label for="" style="color:red">Select Customer</label>
+                                        <select name="cid" class="selectpicker form-control" data-style="btn-success"> 
+                                            @foreach($customers as $customer)
+                                            <option name="cid" value="{{$customer->id}}">{{$customer->name}}</option> 
+                                            @endforeach
+                                        </select> 
+                                                        <label for="productname">Sub Total</label> :
+                                                        <input id="productname" name="subtotal" type="text" class="form-control" value="{{$cart->totalPrice}}" readonly placeholder="{{ Session::has('cart') ? Session::get('cart')->totalPrice : "" }}">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="discount">Discount</label>
-                                                        <input id="discount" name="discount" type="text" class="form-control" >
-                                                    </div>
-                                                   
-                                                   
-                                                    <div class="form-group">
-                                                        <label for="price">Payment recieved</label>
-                                                        <input id="price" name="recieve" type="number" class="form-control" required>
+                                                        <label for="discount">Enter Discount</label>
+                                                        <input id="discount" name="discount" type="text" class="form-control">
                                                     </div>
                                                     <div class="form-group">
-                                                    <a href=" " name="checkout" type="button" class="form-control btn btn-primary">checkout</a>
-                                                        
-                                                        
+                                                        <!-- <label for="discount">Total</label> -->
+                                                        <!-- <input id="discount" name="totalamount" type="number"  value="{{$total}}" readonly> -->
+                                                        <button name="total" type="submit" value="1" class="form-control btn btn-primary">Pay Bill</button>
+
                                                     </div>
                                                     
+                                                    <!-- <div class="form-group">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button name="checkout" type="submit" value="2" class="form-control btn btn-success">pay amount</button>
+                                                    </div> -->
+                                                    
+                                   </form>
+                                    
                                     
                                 </div> <!--end table-responsive-->
 

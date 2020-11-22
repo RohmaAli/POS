@@ -4,7 +4,7 @@
     <head>
         
         <meta charset="utf-8" />
-        <title>Add Product</title>
+        <title>Sales Products</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
@@ -29,6 +29,13 @@
 
     
     <body data-sidebar="dark">
+    <style>
+    option { 
+    background-color: color; 
+    border-radius: value; 
+    font-size: value 
+}
+    </style>
 
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
@@ -59,7 +66,6 @@
 
                 </div>
             </header>
-
 <!-- ========== Left Sidebar Start ========== -->
 <div class="vertical-menu">
 
@@ -100,24 +106,28 @@
 </div>
 <!-- Left Sidebar End -->
 
-<!-- ============================================================== -->
-<!-- Start right Content here -->
-<!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="row">
+                
+            </div>
             <div class="main-content">
-
+                
                 <div class="page-content">
                     <div class="container-fluid">
+                    
 
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Add Product</h4>
+                                    <h4 class="mb-0 font-size-18">checkout</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                            <li class="breadcrumb-item active">Add Product</li>
+                                            <li class="breadcrumb-item active">checkout</li>
                                         </ol>
                                     </div>
 
@@ -125,115 +135,75 @@
                             </div>
                         </div>
                         <!-- end page title -->
-           
-            <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-        
-                                        <!-- <h4 class="card-title">Basic Information</h4>
-                                        <p class="card-title-desc">Fill all information below</p>
-         -->
-                                        <form action="{{route('sizeActions')}}" method="post">
-                                            @csrf
-                                            <button type="submit" name="addSize" class="btn btn-primary mr-1 waves-effect waves-light" value="1"><i class="fa fa-plus"></i> Add Size</button>
-
-                                        <div class="table-responsive">
-                   
-                                            <table class="table table-centered table-nowrap">
-                                                <thead class="thead-light">
-                                                    
-                                                    <tr>
-                                                        <th>Size ID</th>
-                                                        <th>Size Name</th>
-                                                        <th>Size Length</th>
-                                                        <th>Size width</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($sizes as $size)
-                                                    <tr>
-                                                        <td>{{$size->id}}</td>
-                                                        <td>{{$size->title}}</td>
-                                                        <td>{{$size->length}}</td>
-                                                        <td>{{$size->width}}</td>
-                                                        <td>
-                                                        <button class="btn" name="edit" value="{{$size->id}}"><i class="fa fa-edit"></i></button>
-                                                        <button class="btn" name="delete" value="{{$size->id}}"><i class="fa fa-trash"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-
-                                               
-                                                </tbody>
-                                            </table>
-                    
-                                            
-                    </div>
-                    </form>
-        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-
-                    </div> <!-- container-fluid -->
-                </div>
-                <!-- End Page-content -->               
-                <footer class="footer">
-                    <div class="container-fluid">
+                        
                         <div class="row">
-                            <div class="col-sm-6">
-                                <script>document.write(new Date().getFullYear())</script> © Skote.
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="text-sm-right d-none d-sm-block">
-                                    Design & Develop by Themesbrand
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+                        <div class="table-responsive">
+<table class="table table-centered table-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($cart->items as $item)
+                                                <tr>
+                                                   <td>{{$item['item']['title']}}</td>
+                                                   <td>{{$item['qty']}}</td>
+                                                   <td>{{$item['price']}}</td>
+                                                   </tr>
+                                            @endforeach
+                                        </tbody>
+
+                                        </table>
+</div>
+                                        <form action="{{route('amountRecieved')}}" method= "post">
+                                   @csrf
+                                   <div class="form-group">
+                                                        <label for="productname">Sub Total</label> :
+                                                        <input id="productname" name="subtotal" type="text" class="form-control" value="{{$subtotal}}" readonly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="productname">Discount</label> :
+                                                        <input id="productname" name="discount" type="text" class="form-control" value="{{$discount}}" readonly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="productname">Total</label> :
+                                                        <input id="productname" name="total" type="text" class="form-control" value="{{$total}}" readonly>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <label for="discount">payment Recived</label>
+                                                        <input id="discount" name="payment" type="number" class="form-control" required>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <button name="checkout" type="submit" value="2" class="form-control btn btn-success">checkout</button>
+                                                    </div>
+
+                                                    <input type="hidden" name="cid" value="{{$customerID}}">
+                                                    
+                                   </form>
+                        </div> <!-- end row -->
+                        
+                    </div> <!-- container-fluid -->
+                </div>  <!-- End Page-content -->
+            
             </div>
             <!-- end main content-->
 
         </div>
         <!-- END layout-wrapper -->
-
-        </div>
-        <!-- /Right-bar -->
-
         <!-- JAVASCRIPT -->
         <script src="assets/libs/jquery/jquery.min.js"></script>
         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
-
-        <!-- select 2 plugin -->
-        <script src="assets/libs/select2/js/select2.min.js"></script>
-
-        <!-- dropzone plugin -->
-        <script src="assets/libs/dropzone/min/dropzone.min.js"></script>
-
-        <!-- init js -->
-        <script src="assets/js/pages/ecommerce-select2.init.js"></script>
-
+        
         <!-- App js -->
         <script src="assets/js/app.js"></script>
-        <script src="assets/js/pages/dashboard.init.js"></script>
-        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-
-        <script>
-            $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-        </script>
-
     </body>
-
 </html>

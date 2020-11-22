@@ -70,17 +70,25 @@
         <!-- Left Menu Start -->
         <ul class="metismenu list-unstyled" id="side-menu">
             <li class="menu-title" key="t-menu">Menu</li>
+
+
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-store"></i>
                     <span key="t-ecommerce">Ecommerce</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{route('viewSales')}}" key="t-add-product">Sales</a></li>
                     <li><a href="{{route('viewProducts')}}" key="t-add-product">Products</a></li>
-                    <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li>
+                    <li><a href="{{route('viewSizes')}}" key="t-add-product">Sizes</a></li>
+                    <li><a href="{{route('viewWeights')}}" key="t-add-product">Weights</a></li>
+                    <li><a href="{{route('viewCustomers')}}" key="t-add-product">Customers</a></li>
+                    <li><a href="{{route('viewDailyExpense')}}" key="t-add-product">Daily Expense</a></li>
+
+                    <!-- <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li> -->
                     <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
                     <li><a href="{{route('products')}}" key="t-products">Products</a></li>
-                    <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
+                    <!-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li> -->
                    
                 </ul>
             </li>
@@ -91,6 +99,7 @@
 </div>
 </div>
 <!-- Left Sidebar End -->
+
 <!-- ============================================================== -->
 <!-- Start right Content here -->
 <!-- ============================================================== -->
@@ -125,7 +134,7 @@
                                         <h4 class="card-title">Basic Information</h4>
                                         <p class="card-title-desc">Fill all information below</p>
         
-                                        <form action="{{route('actions')}}" method="post">
+                                        <form action="{{route('storeProducts')}}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-6">
@@ -137,52 +146,44 @@
                                                         <label for="price">Price</label>
                                                         <input id="price" name="price" type="text" class="form-control">
                                                     </div>
-                                                    <!-- <div class="form-group">
-                                                    <label for="size"> <b>Enter Size Detail</b> </label><br>
-                                                    <label id="size" for="size-title">Title </label><br>
-                                                    <input id="size-title" name="sizeTitle" type="text" class="form-control" placeholder="e.g(small/medium/large..)">
-                                                    <br>   
-                                                    <label id="size" for="width">Width</label><br>
-                                                    <input id="width" name="width" type="text" class="form-control" placeholder="">
-                                                    <br>  
-                                                    <label id="size" for="length">Length</label><br>
-                                                    <input id="length" name="length" type="text" class="form-control" placeholder="">
-                                                    <br>  
-                                                    </div> -->
-
-                                                    <!-- <div class="form-group">
-                                                    <label for="weight"> <b>Enter Weight Detail</b> </label><br>
-                                                    <label id="weight" for="weight-unit">Unit </label><br>
-                                                    <input id="weight-unit" name="unit" type="text" class="form-control" placeholder="e.g(kg/g/mg..)">
-                                                    <br>   
-                                                    <label for="total-weight">Net weight</label><br>
-                                                    <input id="total-weight" name="totalWeight" type="text" class="form-control" placeholder="">
-                                                  
-                                                    </div> -->
+                                                    
                                                     <div class="form-group">
                                                     <label for="size">Select size:</label>
-                                                    <select name="size" id="size">
-                                                    @foreach($sizes as $size)
+                                                    @if(count($sizes) > 0 )
+                                                        <select name="size"  class="form-control" id="size">
+                                                    
+                                                         @foreach($sizes as $size)
                                                         <option value="{{$size->id}}">{{$size->title}}</option>
                                                         @endforeach
-                                                    </select>
+                                                        </select>
+                                                    @else
+                                                    <p style="color:red">enter sizes first</p>
+                                                    @endif
                                                     </div>
+
+                                                    
                                                     <div class="form-group">
                                                     <label for="weight">Select Weight:</label>
-                                                    <select name="weight" id="weight">
+                                                    @if(count($weights) > 0 )
+                                                    <select  class="form-control" name="weight" id="weight">
                                                     @foreach($weights as $weight)
                                                         <option value="{{$weight->id}}">{{$weight->total_weight}}{{$weight->unit}}</option>
                                                         @endforeach
                                                     </select>
+                                                    @else
+                                                    <p style="color:red">enter weight first</p>
+                                                    @endif
                                                     </div>
+                                                    <div class="form-group">
+                                            <button type="submit" name="addProduct" class="form-control btn btn-primary mr-1 waves-effect waves-light"> Add Product</button>
+                                            </div>
 
                                                     
                                                 </div>
-        
+
                                              
                                             </div>
-        
-                                            <button type="submit" name="addProduct" class="btn btn-primary mr-1 waves-effect waves-light"><i class="fa fa-plus"></i> Add Product</button>
+                                            
                                         <br>
                                        
                     </form>

@@ -17,13 +17,31 @@ class AdminController extends Controller
 {
     public function view()
     {
+        $totalSales = 0;
+        $amountRecieved = 0;
+        $amountCredit = 0;
         $sales = Sale::all();
-        $totalSales = $sales->count();
+        foreach($sales as $sale)
+        {
+            $totalSales = $totalSales + $sale->total;
+        }
+        foreach($sales as $sale)
+        {
+            $amountRecieved = $amountRecieved + $sale->paid_amount;
+        }
+        foreach($sales as $sale)
+        {
+            $amountCredit = $amountCredit + $sale->remaning;
+        }
         $sale = $sales->last();
         $products = Product::all();
         $totalProducts = $products->count();
-        
-        return view('vertical.index', compact('sale', 'totalSales', 'totalProducts'));
+        $customers = Customer::all();
+        return view('vertical.index', compact('sale', 'totalSales','amountRecieved','amountCredit', 'totalProducts', 'customers'));
+    }
+    public function sale(Request $request, $id)
+    {
+        return $id;
     }
 
     public function checkCustomer(Request $request)
@@ -86,7 +104,10 @@ class AdminController extends Controller
         // return $request;
         if($request->addProduct != null)
         {
-            return view('admin.addProducts');
+            $sizes = Size::all();
+            $weights = Weight::all();
+            $product = Product::find($request->edit);
+            return view('admin.addProducts', compact('product', 'sizes', 'weights'));
         }
         elseif($request->edit != null)
         {
@@ -97,11 +118,29 @@ class AdminController extends Controller
         }
         elseif($request->delete != null)
         {
-            $product = Product::find($request->edit);
+            // return $request->delete;
+            $product = Product::find($request->delete);
+            // dd($product);
             $product->delete();
             return redirect()->route('viewProducts');
 
         }
+
+    }
+    public function storeProducts(Request $request)
+    {
+        $size = Size::find($request->size);
+        $weight = Weight::find($request->weight);
+        $product = new Product();
+        $product->title = $request->ProductTitle;
+        $product->sale_price = $request->price;
+        $product->save();
+        $size->product_id = $product->id;
+        $size->save();
+        $weight->product_id = $product->id;
+        $weight->save();
+        return redirect()->route('viewProducts');
+
 
     }
 
@@ -291,16 +330,19 @@ class AdminController extends Controller
      }
      public function viewSales()
      {
+        //  Session::flush();
+        //  return "h";
          $products = Product::all();
          $customers = Customer::all();
          if(Session::has('cart'))
         {
-            $oldCart = Session::get('cart');
-            $cart = new Cart($oldCart);
-            // $products = $cart->items;
-            // $totalPrice = $cart->totalPrice;
+            $cart = Session::get('cart');
+            $total = $cart->totalPrice;
+            return view('admin.sales',compact('products','customers','cart','total'));
+
         }
-         return view('admin.sales',compact('products','customers','cart'));
+        $total = 0;
+         return view('admin.sales',compact('products','customers', 'total'));
      }
      public function removeItem(Request $request, $id)
      {
@@ -310,31 +352,104 @@ class AdminController extends Controller
             
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
-            // dd($cart);
-            // foreach($cart->items as $item)
-            // {
-                
-            //     if($item['item']['id'] == $id)
-            //     {
-            //         $item['qty'] = $item['qty'] - 1;
-            //         $item['price'] = $item['qty'] * $item['price'];
-            //         // return $item['price'];    
-            //         $request->session()->put('cart', $cart);
-            //     }
-            // }
-            foreach($cart as $key=>$item)
-            {
-                $cart->{$key}->item['qty'] = $cart->{$key}->item['qty'] - 1;
-                $cart->{$key}->item['price'] = $cart->{$key}->item['price'] * $cart->{$key}->item['qty'];
-                return $cart->{$key}->item['qty'];
-            }
-            // $cart = Session::get('cart');
-            dd($cart);
+            $qty = 0;
+            $amount = 0;
             
+            foreach($cart->items as $key=>$item)
+            {
+                if($item['item']['id'] == $id)
+                {
+                    if(($item['qty'] > 0) && ($item['price'] > 0 ))
+                    {
+                    $cart->items[$key]['qty'] = $item['qty'] - 1;
+                    $cart->items[$key]['price'] = $item['item']['sale_price'] * $cart->items[$key]['qty'];
+                    }
+                }
+            }   
+               
+                foreach($cart->items as $key=>$item)
+                {
+                    $qty = $qty + $cart->items[$key]['qty'] ;
+                    $amount = $amount + $cart->items[$key]['price'];
+                }
+                $cart->totalQty = $qty;
+                $cart->totalPrice = $amount;
+                // dd($cart);   
+                 $request->session()->put('cart', $cart);
+                
+                //  dd($cart);
+            
+            $products = Product::all();
+            // dd($cart);
+            // return $cart->totalPrice;
+            $total = $cart->totalPrice;
+            $customers = Customer::all();
+            return view('admin.sales', compact('cart','products','total', 'customers'));
         }
-        $products = Product::all();
-        return view('admin.sales', compact('cart','products'));
+ 
+     }
+     public function checkout(Request $request)
+     {
+        
+        if(Session::has('cart'))
+        {
+            // return $request->discount;
+            $cart = Session::get('cart');
+            // dd($oldCart);
+            // $cart = new Cart($oldCart);
+            $total = $cart->totalPrice - $request->discount;
+            // return $total;
+            return view('admin.checkout', compact('total',  'cart'));
+        }
+     }
 
+     public function storeAmount(Request $request)
+     {
+         $paymentRecieved =  $request->payment;
+         if($paymentRecieved >= 0)
+         {
+            $unpaid = $request->total - $paymentRecieved;
+         }
+         $customer = Customer::find($request->cid);
+         $customer->unpaid_balance = $unpaid;
+         $customer->save();
+         $sale = new Sale();
+         $sale->total = $request->total;
+         $sale->paid_amount = $paymentRecieved;
+         $sale->user_id = $customer->id;
+         $sale->remaning = $unpaid;
+         $sale->save();
+         Session::flush();
+         return redirect()->route('admin');
+     }
+     public function total(Request $request)
+     {
+        //  if($request->total != null)
+        //  {
+        $customerID = $request->cid;
+            if(Session::has('cart'))
+            {
+                $cart = Session::get('cart');
+                $subtotal = $request->subtotal;
+                $discount = $request->discount;
+                $total = $request->subtotal - $request->discount;
+                return view('admin.checkout', compact('cart','subtotal','discount', 'total', 'customerID'));
+   
+            }
+        //  }
+        //  elseif($request->checkout != null)
+        //  {
+        //     if(Session::has('cart'))
+        //     {
+        //         $cart = Session::get('cart');
+        //         $subtotal = $request->subtotal;
+        //         $totalamount = $request->total;
+        //         $discount = $request->discount;
+        //         // return $request;
+        //         return view('admin.checkout',compact('subtotal', 'totalamount','cart', 'discount'));
+        //     }
+        //  }
+        
      }
      public function getAddToCart(Request $request, $id) //new
      {
@@ -347,92 +462,12 @@ class AdminController extends Controller
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
         $request->session()->put('cart', $cart);
-        // dd($request->session()->get('cart'));
-        // return redirect()->back();
-        // if(Session::has('cart'))
-        // {
-        //     $oldCart = Session::get('cart');
-        //     $cart = new Cart($oldCart);
-            
-        // }
+        $total = $cart->totalPrice;
         $products = Product::all();
-
-        return view('admin.sales', compact('cart','products'));
+        $customers = Customer::all();
+        $total = 0;
+        return view('admin.sales', compact('cart','products','customers','total'));
      }
-
-     public function getCart()
-     {
-
-     }
-
-   
-
-    
-    // public function StoreProducts(Request $request)
-    // {
-    //     $product = new Product();
-    //     $product->title = $request->ProductTitle;
-    //     $product->sale_price = $request->price;
-    //     $product->save();
-    //      $size = new Size();
-    //      $size->title = $request->sizeTitle;
-    //      $size->width = $request->width;
-    //      $size->length = $request->length;
-    //      $size->product_id = $product->id;
-    //      $size->save();
-
-    //      $weight = new Weight();
-    //      $weight->unit = $request->unit;
-    //      $weight->total_weight = $request->totalWeight;
-    //      $weight->product_id = $product->id;
-    //      $weight->save();
-    //     return redirect()->route('viewProducts');
-        
-        //    return $request;
-            // $product = new Product();
-            // $product->title = $request->title;
-            // $product->sale_price = $request->price;
-            // $product->save();
-            // foreach($request->size as $size)
-            // {
-            //     $size = Size::find($size);
-            //     $size->product_id = $product->id;
-            //     $size->save();
-            // }
-            // return view('admin.addProducts');
-        
-       
-    // }
-    // public function editProducts(Request $request)
-    // {
-    //     $product = Product::find($request->edit);
-    //     $product->title = $request->ProductTitle;
-    //     $product->sale_price = $request->price;
-    //     $product->save();
-    //     $size = Size::find($request->size);
-    //     $size->product_id = $product->id;
-    //     $size->save();
-    //     $weight = Weight::find($request->weight);
-    //     $weight->product_id = $product->id;
-    //     $weight->save();
-
-        //  $size = new Size();
-        //  $size->title = $request->sizeTitle;
-        //  $size->width = $request->width;
-        //  $size->length = $request->length;
-        //  $size->product_id = $product->id;
-        //  $size->save();
-
-        //  $weight = new Weight();
-        //  $weight->unit = $request->unit;
-        //  $weight->total_weight = $request->totalWeight;
-        //  $weight->product_id = $product->id;
-        //  $weight->save();
-        // return redirect()->route('viewProducts');
-        
-      
-       
-    // }
 
     public function viewPurchasing()
     {
