@@ -17,7 +17,7 @@ class CreateWeightsTable extends Migration
             $table->bigIncrements('id');
             $table->string('unit')->nullable();
             $table->string('total_weight')->nullable();
-            $table->integer('product_id')->nullable();
+            // $table->integer('product_id')->nullable();
 
 
             $table->timestamps();

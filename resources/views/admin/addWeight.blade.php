@@ -129,14 +129,7 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <!-- <div class="form-group">
-                                                        <label for="productname">Size Name</label>
-                                                        <input id="productname" name="ProductTitle" type="text" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="price">Price</label>
-                                                        <input id="price" name="price" type="text" class="form-control">
-                                                    </div> -->
+                                                   
                                                     <div class="form-group">
                                                     <label for="size"> <b>Enter Weight Detail</b> </label><br>
                                                     
@@ -148,9 +141,6 @@
                                                     <br>  
                                                     </div>
 
-                                                  
-
-                                                    
                                                 </div>
         
                                              

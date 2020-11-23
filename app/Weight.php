@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Weight extends Model
 {
+    // public function products()
+    // {
+    //     return $this->belongsToMany('App\Product');
+    // }
     public function products()
     {
-        return $this->belongsTo('App\Product');
+        return $this->hasMany('App\Product');
     }
 }

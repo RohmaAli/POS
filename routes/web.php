@@ -39,7 +39,7 @@ Route::post('/actions/expense', 'AdminController@expenseActions')->name('expense
 Route::post('/edit/expense','AdminController@editExpense')->name('editExpense');
 Route::post('/store/expense','AdminController@storeExpense')->name('storeExpense');
 Route::get('/view/sales', 'AdminController@viewSales')->name('viewSales');
-Route::get('/add-to-cart/{id}', 'AdminController@getAddToCart')->name('product.addtocart');
+Route::post('/add-to-cart/{id}', 'AdminController@getAddToCart')->name('product.addtocart');
 Route::get('/shopping-cart', 'AdminController@getCart')->name('product.shoppingCart');
 Route::get('/remove/item/{id}', 'AdminController@removeItem')->name('products.remove');
 Route::post('/total', 'AdminController@total')->name('products.total');

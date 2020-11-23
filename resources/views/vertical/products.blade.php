@@ -147,8 +147,8 @@
                                                         <th>Product ID</th>
                                                         <th>Product Name</th>
                                                         <th>Product Price</th>
-                                                        <th>Product Weight</th>
-                                                        <th>Product Size</th>
+                                                        <th>Available Weights</th>
+                                                        <th>Available Sizes</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -158,15 +158,11 @@
                                                         <td>{{$product->id}}</td>
                                                         <td>{{$product->title}}</td>
                                                         <td>{{$product->sale_price}}</td>
-                                                        <td>
-                                                        @foreach($product->weights as $weight)
-                                                        {{$weight->total_weight}}{{$weight->unit}} <br>
-                                                        @endforeach
+                                                        <td>{{$product->weight->total_weight}}{{$product->weight->unit}}
                                                         </td>
                                                         <td>
-                                                        @foreach($product->sizes as $size)
-                                                        {{$size->title}} <br>length:{{$size->length}}|width{{$size->width}} <br>
-                                                        @endforeach
+                                                           <span style="color:green">size:{{$product->size->title}} </span> <b>|</b> <span style="color:orange">length:{{$product->size->length}} </span>
+                                                           <b>|</b> <span style="color:blue">width:{{$product->size->width}} </span>
                                                         </td>
                                                         <td>
                                                         <button class="btn" name="edit" value="{{$product->id}}"><i class="fa fa-edit"></i></button>

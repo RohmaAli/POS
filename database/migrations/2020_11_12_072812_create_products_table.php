@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('title')->nullable();
             $table->double('sale_price')->nullable();
             $table->bigInteger('quantity_sold')->nullable();
+            $table->integer('size_id')->nullable();
+            $table->integer('weight_id')->nullable();
             $table->timestamps();
         });
     }

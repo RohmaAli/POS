@@ -91,14 +91,7 @@ class AdminController extends Controller
         }
     }
 
-    public function viewProducts()
-    {
-        
-        $sizes = Size::all();
-        $products = Product::all();
-        return view('vertical.products', compact('sizes','products'));
-
-    }
+    
     public function productActions(Request $request) //new
     {
         // return $request;
@@ -127,19 +120,53 @@ class AdminController extends Controller
         }
 
     }
+    public function viewProducts()
+    {
+        // return redirect()->route('viewProducts');
+        
+        // $sizes = Size::all();
+        $products = Product::all();
+        return view('vertical.products', compact('products'));
+
+    }
     public function storeProducts(Request $request)
     {
-        $size = Size::find($request->size);
-        $weight = Weight::find($request->weight);
+        // return $request;
+      
         $product = new Product();
         $product->title = $request->ProductTitle;
         $product->sale_price = $request->price;
+        // $product->size_id = $request->size;
+        // $product->weight_id = $request->weight;
+        $weight = Weight::find($request->weight);
+        $size = Size::find($request->size);
+        $weight->products()->save($product);
+        $size->products()->save($product);
+
         $product->save();
-        $size->product_id = $product->id;
-        $size->save();
-        $weight->product_id = $product->id;
-        $weight->save();
+        
+        // return $product->size;
+        
+        // foreach($request->sizes as $size)
+        // {
+        //     $product = new Product();
+        //     $product->title = $request->ProductTitle;
+        //     $product->sale_price = $request->price;
+        //     $s = Size::find($size);
+        //     $product->size_id = $s->id;
+        //     $product->weight_id = 
+        //     $product->save();
+            // $product->sizes()->attach($s);
+        // }
+        // $weight->product_id = $product->id;
+        // foreach($request->weights as $weight)
+        // {
+        //     $w = Weight::find($weight);
+        //     $product->weights()->attach($w);
+        // }
         return redirect()->route('viewProducts');
+        // $products = Product::all();
+        // return view('vertical.products', compact('size','products','weight'));
 
 
     }
@@ -430,6 +457,8 @@ class AdminController extends Controller
             if(Session::has('cart'))
             {
                 $cart = Session::get('cart');
+                // Session::flush();
+                // dd($cart);
                 $subtotal = $request->subtotal;
                 $discount = $request->discount;
                 $total = $request->subtotal - $request->discount;
@@ -453,15 +482,20 @@ class AdminController extends Controller
      }
      public function getAddToCart(Request $request, $id) //new
      {
+        //  dd($request->wid);
         $product = Product::find($id);
+        $weight = Weight::find($request->wid);
+        $size = Size::find($request->sid);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         // dd($oldCart) ;
-        // Session::flush();
-        //         dd($oldCart) ;
-
+        Session::flush();
+        return "done";
+               
+        
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
         $request->session()->put('cart', $cart);
+        // dd($cart);
         $total = $cart->totalPrice;
         $products = Product::all();
         $customers = Customer::all();

@@ -36,7 +36,16 @@
     background-color: color; 
     border-radius: value; 
     font-size: value 
+
 }
+/* table, td, th {
+  border: 1px solid black;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+} */
     </style>
 
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
@@ -140,7 +149,7 @@
                         <!-- end page title -->
                         
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="card">
                                     
                
@@ -155,6 +164,8 @@
                                                        
                                                         <th>Product ID</th>
                                                         <th>Product Name</th>
+                                                        <th>Product Weight</th>
+                                                        <th>Product Size</th>
                                                         <th>Product Price</th>
                                                         <th>Action</th>
                                                         <!-- <th>Quantity</th> -->
@@ -162,21 +173,31 @@
                                                 </thead>
                                                 <tbody>
                                                @foreach($products as $product)
-                                               <!-- <form action="{{route('product.addtocart',['id'=>$product->id])}}" method="get"> -->
+                                               <form action="{{route('product.addtocart',['id'=>$product->id])}}" method="post">
                 @csrf
                                                     <tr>
                                                        
                                                         <td>{{$product->id}}</td>
                                                         <td>{{$product->title}}</td>
-                                                        <td>{{$product->sale_price}}</td>
-                                                        <!-- <td><button type="submit" name="productid" value="{{$product->id}}">Add to cart</button></td> -->
-                                                        <td>
-                                                            <a href="{{route('product.addtocart',['id'=>$product->id])}}" class="btn btn-success" role="button">Add To Cart</a>
-                                                        </td>
-                                                        <!-- <td><input type="number" name="quantity[]" ></td> -->
+                                                        <td> 
                                                         
+                                                        {{$product->weight->total_weight}}{{$product->weight->unit}}
+                                                       
+                                                        </td>
+                                                        <td>
+                                                       
+                                                        <span style="color:green">size:<b>{{$product->size->title}}</b> </span> <b>|</b> <span style="color:orange">length:<b>{{$product->size->length}}</b> </span>
+                                                           <b>|</b> <span style="color:blue">width:<b>{{$product->size->width}}</b> </span>                                                           
+                                                       
+                                                        </td>
+                                                        <td>{{$product->sale_price}}</td>
+                                                        <td><button type="submit" name="productid" class="btn btn-success" value="{{$product->id}}">Add to cart</button></td>
+                                                        <!-- <td>
+                                                            <a href="{{route('product.addtocart',['id'=>$product->id])}}" class="btn btn-success" role="button">Add To Cart</a>
+                                                        </td> -->
+                                                   
                                                     </tr>
-                                                    <!-- </form> -->
+                                                    </form>
                                                @endforeach
                                                 </tbody>
                                             </table>
@@ -215,16 +236,7 @@
                                                         $itemId = $item['item']['id'];
                                                    @endphp
                                                    <a href="{{route('products.remove',['id' => $itemId])}}">remove 1</a>
-                                                   <!-- <div class="btn-group">
-                                                   <button type="button" class="btn btn-primary btn-xs dropdown-toogle" data-toogle="dropdown">Action<span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                        <li>remove 1</li>
-                                                        <li>remove all</li>
-                                                        </ul> -->
-
-                                                   <!-- </div>  -->
-
+                                                  
                                                    </td>
                                                 </tr>
                                             @endforeach
