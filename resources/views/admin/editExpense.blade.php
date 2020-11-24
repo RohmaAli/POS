@@ -70,17 +70,25 @@
         <!-- Left Menu Start -->
         <ul class="metismenu list-unstyled" id="side-menu">
             <li class="menu-title" key="t-menu">Menu</li>
+
+
             <li>
-                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <a href="javascript: void(0);" class=" waves-effect">
                     <i class="bx bx-store"></i>
                     <span key="t-ecommerce">Ecommerce</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{route('viewSales')}}" key="t-add-product">Sales</a></li>
                     <li><a href="{{route('viewProducts')}}" key="t-add-product">Products</a></li>
-                    <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li>
-                    <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
-                    <li><a href="{{route('products')}}" key="t-products">Products</a></li>
-                    <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
+                    <li><a href="{{route('viewSizes')}}" key="t-add-product">Sizes</a></li>
+                    <li><a href="{{route('viewWeights')}}" key="t-add-product">Weights</a></li>
+                    <li><a href="{{route('viewCustomers')}}" key="t-add-product">Customers</a></li>
+                    <li><a href="{{route('viewDailyExpense')}}" key="t-add-product">Daily Expense</a></li>
+
+                    <!-- <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li> -->
+                    <!-- <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li> -->
+                    <!-- <li><a href="{{route('products')}}" key="t-products">Products</a></li> -->
+                    <!-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li> -->
                    
                 </ul>
             </li>
@@ -103,12 +111,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Add Product</h4>
+                                    <h4 class="mb-0 font-size-18">Edit Daily Expense</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                            <li class="breadcrumb-item active">Add Product</li>
+                                            <li class="breadcrumb-item active">Edit Daily Expense</li>
                                         </ol>
                                     </div>
 
@@ -135,21 +143,22 @@
                                                         <label id="size" for="size-title">Title</label><br>
                                                         <input id="size-title" name="title" type="text" class="form-control" value="{{$expense->title}}">
                                                         <br>   
-                                                        <label id="size" for="width">Amount</label><br>
+                                                        <label id="size" for="width">Amount(pkr/-)</label><br>
                                                         <input id="width" name="amount" type="number" class="form-control" value="{{$expense->amount}}">
                                                         <br>
                                                         <label id="size" for="width">description</label><br>
-                                                        <textarea name="description" id="width" cols="30" rows="10"class="form-control" value="{{$expense->description}}"></textarea>
+                                                        <textarea name="description" id="width" cols="30" rows="5"class="form-control" >{{$expense->description}}</textarea>
                                                         <br>  
                                                     
                                                     </div>
+                                                    <button type="submit" name="editExpense" class="form-control btn btn-primary mr-1 waves-effect waves-light" value="{{$expense->id}}">Save changes</button>
+
                 
                                                 </div>
         
                                              
                                             </div>
         
-                                            <button type="submit" name="editExpense" class="btn btn-primary mr-1 waves-effect waves-light" value="{{$expense->id}}">Save changes</button>
                                         <br>
                                        
                     </form>

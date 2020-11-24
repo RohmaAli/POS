@@ -74,12 +74,12 @@
     <!--- Sidemenu -->
     <div id="sidebar-menu">
         <!-- Left Menu Start -->
-        <ul class="metismenu list-unstyled" id="side-menu">
-            <li class="menu-title" key="t-menu">Menu</li>
+        <ul class="metismenu list-unstyled" >
+            <li class="menu-title" >Menu</li>
 
 
             <li>
-                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <a href="javascript: void(0);" class=" waves-effect">
                     <i class="bx bx-store"></i>
                     <span key="t-ecommerce">Ecommerce</span>
                 </a>
@@ -92,7 +92,7 @@
                     <li><a href="{{route('viewDailyExpense')}}" key="t-add-product">Daily Expense</a></li>
 
                     <!-- <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li> -->
-                    <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
+                    <!-- <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li> -->
                     <!-- <li><a href="{{route('products')}}" key="t-products">Products</a></li> -->
                     <!-- <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li> -->
                    
