@@ -45,6 +45,8 @@ Route::get('/remove/item/{id}', 'AdminController@removeItem')->name('products.re
 Route::post('/total', 'AdminController@total')->name('products.total');
 Route::post('/payment/recieved','AdminController@storeAmount')->name('amountRecieved');
 Route::get('/sale/{id}', 'AdminController@sale')->name('products.sale');
+Route::get('/view/report', 'AdminController@viewReport')->name('viewReport');
+Route::post('/view/datewiseReport', 'AdminController@viewdatewiseReport')->name('datewiseReport');
 
 
 

@@ -151,6 +151,7 @@ table {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
+                                <center><h3><b>Products</b></h3></center>
                                     
                
                 
@@ -210,8 +211,9 @@ table {
                                     </div>
                                 </div>
                             </div> <!--end col-md-8-->
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="card">
+                                <center><h3><b>Shopping Cart</b></h3></center>
                                 @if(Session::has('cart'))
                                
                                 <div class="table-responsive">

@@ -145,82 +145,27 @@
                                             <label for="phone">Phone</label>
                                             <input id="phone" type="number" class="form-control" readonly value={{$customer->phone}}>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="cnic">Cnic</label>
-                                            <input id="cnic" type="number" class="form-control" readonly value={{$customer->cnic}}>
-                                        </div>
+                                        
                                         <div class="form-group">
                                             <label for="unpaid">Unpaid Balance</label>
-                                            <input id="unpaid" type="number" class="form-control" readonly value={{$unpaid}}>
+                                            <input id="unpaid" type="number" class="form-control" readonly value={{$customer->unpaid_balance}}>
                                         </div>
-                                        @if($unpaid != 0)
+                                        @if($customer->unpaid_balance != 0)
                                         <div class="form-group">
                                             <label for="pay">Pay Remaining Balance</label>
                                             <input  id="pay" for="payAmount" name="payAmount" type="number" class="form-control" required>
                                         </div>
                                         <div class="form-group">
-                                            <button id="payAmount" type="submit" name="pay" class="form-control btn btn-success" value={{$customer->id}}>Pay</button>
+                                            <button id="payAmount" type="submit" name="pay" class="form-control btn btn-success" value="{{$customer->id}}">Pay</button>
 
                                         </div>
                                         @endif
         
-                    <div class="table-responsive">
-                                            <table class="table table-centered table-nowrap">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th>Sale ID</th>
-                                                        <th>Date</th>
-                                                        <th>Products</th>
-                                                        <th>Sub Total (RS)</th>
-                                                        <th>Discount (RS)</th>
-                                                        <th>Total (RS)</th>
-                                                        <th>Remaining (RS)</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                               @foreach($sales as $sale)
-                                                    <tr>
-                                                        <td>{{$sale->id}}</td>
-                                                        <td>{{$sale->updated_at}}</td>
-                                                        
-                                                        <td>
-                                                        @foreach($sale->products as $product)
-                                                        {{$product->title}}: <b>RS {{$product->sale_price}}/-</b> <br>
-                                                        @endforeach
-                                                        </td>
-                                                        
-                                                        <td>{{$sale->subtotal}}</td>
-                                                        <td>{{$sale->discount}}</td>
-                                                        <td>{{$sale->total}}</td>
-                                                        <td>{{$sale->remaning}}</td>
-                                                    </tr>
-
-                                               @endforeach
-                                                </tbody>
-                                            </table>
-                                           
-                    </div>
+                    
 
                 </form>
                                         
-                                        <ul class="pagination pagination-rounded justify-content-end mb-2">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                                    <i class="mdi mdi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -137,11 +137,20 @@
                         <!-- end page title -->
                         
                         <div class="row">
-                        <div class="table-responsive">
-<table class="table table-centered table-nowrap">
+                            <div class="col-md-9">
+                            
+                            customer Name : <b>{{$customer->name}}</b> &nbsp;
+                            customer Phone : <b>{{$customer->phone}}</b>
+                          
+                           
+                            
+                            <div class="table-responsive">
+                            <table class="table table-centered table-nowrap">
                                         <thead>
                                             <tr>
                                                 <th>Product</th>
+                                                <th>Size</th>
+                                                <th>Weight</th>
                                                 <th>Qty</th>
                                                 <th>Price</th>
                                                 
@@ -151,6 +160,9 @@
                                             @foreach($cart->items as $item)
                                                 <tr>
                                                    <td>{{$item['item']['title']}}</td>
+                                                   <td><span style="color:green">size:{{$item['item']->size->title}} </span> <b>|</b> <span style="color:orange">length:{{$item['item']->size->length}} </span>
+                                                        <b>|</b> <span style="color:blue">width:{{$item['item']->size->width}}</span></td>
+                                                   <td>{{$item['item']->weight->total_weight}}{{$item['item']->weight->unit}}</td>
                                                    <td>{{$item['qty']}}</td>
                                                    <td>{{$item['price']}}</td>
                                                    </tr>
@@ -186,6 +198,7 @@
                                                     <input type="hidden" name="cid" value="{{$customerID}}">
                                                     
                                    </form>
+                                   </div><!--end col-md-9-->
                         </div> <!-- end row -->
                         
                     </div> <!-- container-fluid -->

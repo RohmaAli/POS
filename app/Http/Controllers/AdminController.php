@@ -12,6 +12,7 @@ use App\Customer;
 use App\DailyExpense;
 use Illuminate\Http\Request;
 use Session;
+use DB;
 
 class AdminController extends Controller
 {
@@ -136,39 +137,12 @@ class AdminController extends Controller
         $product = new Product();
         $product->title = $request->ProductTitle;
         $product->sale_price = $request->price;
-        // $product->size_id = $request->size;
-        // $product->weight_id = $request->weight;
         $weight = Weight::find($request->weight);
         $size = Size::find($request->size);
         $weight->products()->save($product);
         $size->products()->save($product);
-
         $product->save();
-        
-        // return $product->size;
-        
-        // foreach($request->sizes as $size)
-        // {
-        //     $product = new Product();
-        //     $product->title = $request->ProductTitle;
-        //     $product->sale_price = $request->price;
-        //     $s = Size::find($size);
-        //     $product->size_id = $s->id;
-        //     $product->weight_id = 
-        //     $product->save();
-            // $product->sizes()->attach($s);
-        // }
-        // $weight->product_id = $product->id;
-        // foreach($request->weights as $weight)
-        // {
-        //     $w = Weight::find($weight);
-        //     $product->weights()->attach($w);
-        // }
         return redirect()->route('viewProducts');
-        // $products = Product::all();
-        // return view('vertical.products', compact('size','products','weight'));
-
-
     }
 
     public function viewWeights() //new
@@ -285,7 +259,7 @@ class AdminController extends Controller
         }
         elseif($request->view != null)
         {
-            $customer = Customer::find($request->delete);
+            $customer = Customer::find($request->view);
             return view('admin.customerDetails', compact('customer'));
 
         }
@@ -438,14 +412,25 @@ class AdminController extends Controller
             $unpaid = $request->total - $paymentRecieved;
          }
          $customer = Customer::find($request->cid);
-         $customer->unpaid_balance = $unpaid;
+         $customer->unpaid_balance = $customer->unpaid_balance + $unpaid ;
          $customer->save();
          $sale = new Sale();
          $sale->total = $request->total;
          $sale->paid_amount = $paymentRecieved;
          $sale->user_id = $customer->id;
          $sale->remaning = $unpaid;
+         $sale->discount = $request->discount;
+         $sale->subtotal = $request->subtotal;
          $sale->save();
+         $cart = Session::get('cart');
+         foreach($cart->items as $item)
+         {
+            //  return $item;
+             $product = Product::find($item['item']['id']);
+            //  return $product; 
+             $sale->products()->attach($product, ['quantity_sold' => $item['qty']]);
+         }
+
          Session::flush();
          return redirect()->route('admin');
      }
@@ -453,7 +438,9 @@ class AdminController extends Controller
      {
         //  if($request->total != null)
         //  {
+            // return $request;
         $customerID = $request->cid;
+        $customer = Customer::find($customerID);
             if(Session::has('cart'))
             {
                 $cart = Session::get('cart');
@@ -462,22 +449,10 @@ class AdminController extends Controller
                 $subtotal = $request->subtotal;
                 $discount = $request->discount;
                 $total = $request->subtotal - $request->discount;
-                return view('admin.checkout', compact('cart','subtotal','discount', 'total', 'customerID'));
+                return view('admin.checkout', compact('cart','subtotal','discount', 'total', 'customerID', 'customer'));
    
             }
-        //  }
-        //  elseif($request->checkout != null)
-        //  {
-        //     if(Session::has('cart'))
-        //     {
-        //         $cart = Session::get('cart');
-        //         $subtotal = $request->subtotal;
-        //         $totalamount = $request->total;
-        //         $discount = $request->discount;
-        //         // return $request;
-        //         return view('admin.checkout',compact('subtotal', 'totalamount','cart', 'discount'));
-        //     }
-        //  }
+      
         
      }
      public function getAddToCart(Request $request, $id) //new
@@ -488,8 +463,8 @@ class AdminController extends Controller
         $size = Size::find($request->sid);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         // dd($oldCart) ;
-        Session::flush();
-        return "done";
+        // Session::flush();
+        // return "done";
                
         
         $cart = new Cart($oldCart);
@@ -579,8 +554,9 @@ class AdminController extends Controller
     }
     public function payRemainingBalance(Request $request)
     {
-        $customer = User::find($request->pay);
-        if($request->payAmount >= $customer->unpaid_balance)
+        $customer = Customer::find($request->pay);
+        // return$customer;
+        if($request->payAmount <= $customer->unpaid_balance)
         {
         $customer->unpaid_balance = $customer->unpaid_balance - $request->payAmount;
         $customer->save();
@@ -593,9 +569,92 @@ class AdminController extends Controller
         
     }
 
-    // public function viewProducts()
-    // {
-    //     $products = Product::all();
-    //     return view('admin.products', compact('products'));
-    // }
+    public function viewReport()
+    {
+        $sales = Sale::all();
+        $total_quantity_sold =0; //number of products sold overall
+        $total_amount =0; //amount of sold products overall
+        $total_amount_recieved = 0; //amount recieved overall
+        $amount_credit = 0; //amount credit overall
+        foreach($sales as $sale)
+        {
+            // $created_at =  strtotime($sale->created_at);
+            // $dates[] = date('M d, Y', $created_at);
+            $dates[] = $sale->created_at;
+            $pivotData =  DB::table('product_sale')->where('sale_id', $sale->id)->get();
+            // dd($pivotData);
+            foreach($pivotData as $data)
+            {
+                // return response()->json($data->quantity_sold);
+                // $quantity = $quantity + response()->json($data->quantity_sold);
+                $total_quantity_sold = $total_quantity_sold + $data->quantity_sold;
+    
+            }
+            $total_amount_recieved = $total_amount_recieved + $sale->paid_amount;
+            $amount_credit = $amount_credit + $sale->remaning;
+            $total_amount = $total_amount + $sale->total;
+        }
+        // return $dates;  
+
+        
+        return view('admin.viewReport', compact('total_quantity_sold','total_amount_recieved', 'amount_credit', 'total_amount', 'dates'));
+    }
+
+    public function viewdatewiseReport(Request $request)
+    {
+        // return $request;
+        $from =  strtotime($request->from);
+        $fromDate = date('M d, Y', $from);
+        $till =  strtotime($request->till);
+        $tillDate = date('M d, Y', $till);
+        // return $fromDate;
+        
+        $sales = Sale::all();
+        foreach($sales as $sale)
+        {
+            $t = strtotime($sale->created_at);
+            $date = date('M d, Y', $t);
+            if(($date >= $fromDate) && ($date <= $tillDate))
+            {
+                $allSales[] = $sale;
+            }
+            // if($date == $fromDate)
+            // {
+            //     $allSales[] = $sale;
+            // }
+        }
+        $totalQty = 0;
+        $total_amount =0;
+        $total_amount_recieved = 0; //amount recieved overall
+        $amount_credit = 0; //amount credit overall
+        foreach($allSales as $sale)
+        {
+            $pivotData[] = DB::table('product_sale')->where('sale_id', $sale->id)->get();
+            $total_amount_recieved = $total_amount_recieved + $sale->paid_amount;
+            $amount_credit = $amount_credit + $sale->remaning;
+            $total_amount = $total_amount + $sale->total;
+           
+        }
+        // return $pivotData;
+        
+        foreach($pivotData as $data)
+        {
+            // return $data->quantity_sold;
+            foreach($data as $d)
+            {
+                $quantitySold[] = $d->quantity_sold;
+                $totalQty = $totalQty + $d->quantity_sold;
+
+            }
+           
+        }
+        // return $totalQty;
+        
+        
+
+        // return $allSales[1]->products->first(); // sales of from date
+        
+       return view('admin.datewiseReport',compact('allSales', 'from', 'till', 'quantitySold', 'totalQty', 'total_amount','amount_credit','total_amount_recieved'));
+    }
 }
+
