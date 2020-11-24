@@ -74,6 +74,8 @@
                     <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li>
                     <li><a href="{{route('products')}}" key="t-products">Products</a></li>
                     <li><a href="ecommerce-customers.html" key="t-customers">Customers</a></li>
+                    <li><a href="{{route('viewReport')}}" key="t-add-product">Report</a></li>
+
                    
                 </ul>
             </li>

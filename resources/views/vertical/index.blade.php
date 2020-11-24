@@ -69,6 +69,8 @@
                     <li><a href="{{route('viewWeights')}}" key="t-add-product">Weights</a></li>
                     <li><a href="{{route('viewCustomers')}}" key="t-add-product">Customers</a></li>
                     <li><a href="{{route('viewDailyExpense')}}" key="t-add-product">Daily Expense</a></li>
+                    <li><a href="{{route('viewReport')}}" key="t-add-product">Report</a></li>
+
 
                     <!-- <li><a href="{{route('purchase')}}" key="t-orders">Purchasing</a></li> -->
                     <!-- <li><a href="{{route('customerDetail')}}" key="t-add-product">Customer Detail</a></li> -->

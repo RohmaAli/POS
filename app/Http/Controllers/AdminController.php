@@ -295,6 +295,20 @@ class AdminController extends Controller
 
         }
      }
+     public function editProducts(Request $request)
+     {
+         $product = Product::find($request->edit);
+         $product->title = $request->ProductTitle;
+         $product->sale_price = $request->price;
+         $weight = Weight::find($request->weight);
+         $size = Size::find($request->size);
+         $weight->products()->save($product);
+         $size->products()->save($product);
+         $product->save();
+         return redirect()->route('viewProducts');
+
+
+     }
      public function editExpense(Request $request)
      {
          $expense = DailyExpense::find($request->editExpense);
